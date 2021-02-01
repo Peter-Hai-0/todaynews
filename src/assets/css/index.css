@@ -1,0 +1,214 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/*今日头条头部样式*/
+.head {
+  background: black;
+  color: white;
+  height: 30px;
+}
+
+.weather {
+  padding-top: 2px;
+}
+
+.city {
+  margin-left: 10px;
+  padding-top: 5px;
+}
+
+.city_weather {
+  margin-left: 10px;
+}
+
+.city_temperature {
+  margin-left: 10px;
+}
+
+.zhuce {
+  margin-right: 10px;
+  background: black;
+  color: white;
+}
+
+/* 今日头条标题样式*/
+.title {
+  color: red;
+  font-size: 25px;
+  text-align: center;
+}
+
+/*今日头条路由样式*/
+.tab {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  justify-content: space-evenly;
+
+}
+
+.tab a {
+  font-size: 18px;
+  text-decoration: none;
+
+}
+
+/*搜索框样式*/
+.search-wrapper {
+  margin-right: 10px;
+}
+
+.search-wrapper button {
+  margin-left: 2px;
+}
+
+.search-wrapper input {
+  height: 20px;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+/*左右样式*/
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+}
+
+.right {
+  background: aliceblue;
+  width: 38%;
+}
+
+/*登录样式*/
+.login-box {
+  margin: 10px 10px;
+  border: 1px solid #e8e8e8;
+  background: white;
+  height: 160px;
+}
+
+.login-box p {
+  font-size: 10px;
+  text-align: center;
+}
+
+.login-box button {
+  background: red;
+  color: white;
+  width: 50%;
+  height: 20%;
+  margin-left: 28%;
+}
+
+/*文章列表样式*/
+.list_box {
+  height: 60px;
+  margin-left: 20px;
+}
+
+.list_title {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.3;
+
+}
+
+.list_title a {
+  text-decoration: none;
+  color: black;
+}
+
+.list_res {
+  color: red;
+}
+
+.list_time {
+  margin-left: 5px;
+}
+
+/*底部样式*/
+.tail {
+  text-align: center;
+  white-space: nowrap;
+}
+
+/*个人中心样式*/
+.me-head {
+  background: black;
+  height: 30px;
+  color: white;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.me {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+
+
+}
+
+.me-left {
+  padding-left: 5%;
+  padding-right: 5%;
+  background: #e8e8e8;
+  height: 100%;
+}
+
+.me-right {
+  flex: 1;
+}
+
+.me-item a {
+  text-decoration: none;
+  color: black;
+  white-space: nowrap;
+}
+
+/*文章列表样式*/
+.articlelist {
+  text-align: center;
+}
+
+.articlelist-table {
+  text-align: center;
+  margin: 5% 5% 5% 5%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.articlelist-table .th {
+  margin-left: 100px;
+}
+
+/*文章录入*/
+.eidt {
+
+}
+
+.edit ul {
+  font-size: 20px;
+  margin-left: 30%;
+}
+
+.edit input {
+  height: 25px;
+}
+
+.edit textarea {
+  height: 200px;
+}

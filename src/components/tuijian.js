@@ -1,6 +1,7 @@
 import React from 'react';
 import {Router, Route, Link} from 'react-router-dom';
-import Content from './tuijian_content/content';
+import Content from './content';
+import axios from 'axios'
 
 class Tuijian extends React.Component {
     constructor(props) {
@@ -20,7 +21,24 @@ class Tuijian extends React.Component {
                     time: '2021.1.2 12:39'
                 },
             ]
+
         }
+    }
+
+    componentDidMount() {
+        this.callAPI();
+
+    }
+
+    callAPI = () => {
+        axios.get('https://qc8vvg.fn.thelarkcloud.com/query?_id=6017fbb1c280fd0041e06074')
+            .then((res) => {
+                console.log(res);
+
+            })
+            .catch((err) => {
+                console.log(err)
+            })
     }
 
     render() {
@@ -32,7 +50,7 @@ class Tuijian extends React.Component {
 
                             <div key={key} className={'list_box'}>
                                 <div className={'list_title'}>
-                                    <Link to={`/content/${value.aid}`}>{value.title}</Link>
+                                    <Link target="_blank" to={`/content/${value.aid}`}>{value.title}</Link>
                                 </div>
                                 <div className={'list_minbox'}>
                                     <a className={'list_res'}>{value.resource}</a>

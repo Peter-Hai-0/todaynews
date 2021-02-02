@@ -38,7 +38,7 @@ class App extends React.Component {
     render() {
         return (
             <Router>
-                <div>
+                <div className={'body'}>
                     < Head/>
                     <header className="title">今日头条
                         <div className="search-wrapper" style={{float: 'right'}}>

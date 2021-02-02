@@ -12,11 +12,17 @@ code {
     monospace;
 }
 
+.body {
+  min-width: 1054px;
+  min-height: 1100px;
+}
+
 /*今日头条头部样式*/
 .head {
   background: black;
   color: white;
   height: 30px;
+  white-space: nowrap;
 }
 
 .weather {
@@ -40,6 +46,7 @@ code {
   margin-right: 10px;
   background: black;
   color: white;
+  white-space: nowrap;
 }
 
 /* 今日头条标题样式*/
@@ -87,9 +94,14 @@ code {
 
 }
 
+.left {
+  margin-left: 5%;
+}
+
 .right {
   background: aliceblue;
-  width: 38%;
+  width: 25%;
+  margin-right: 5%;
 }
 
 /*登录样式*/
@@ -103,6 +115,7 @@ code {
 .login-box p {
   font-size: 10px;
   text-align: center;
+  white-space: nowrap;
 }
 
 .login-box button {

@@ -62,7 +62,8 @@ code {
   flex-direction: row;
   flex: 1;
   justify-content: space-evenly;
-
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
 .tab a {
@@ -95,13 +96,17 @@ code {
 }
 
 .left {
-  margin-left: 5%;
+  margin-left: 15%;
+  margin-right: 5%;
+  min-width: 640px;
+
 }
 
 .right {
   background: aliceblue;
   width: 25%;
-  margin-right: 5%;
+  margin-right: 10%;
+  margin-left: 5%;
 }
 
 /*登录样式*/
@@ -146,6 +151,7 @@ code {
 
 .list_res {
   color: red;
+  margin-left: 5px;
 }
 
 .list_time {
@@ -224,4 +230,18 @@ code {
 
 .edit textarea {
   height: 200px;
+}
+
+/*详情页面样式*/
+.content img {
+  max-width: 640px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.content-p {
+  font-size: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  white-space: pre-wrap;
 }

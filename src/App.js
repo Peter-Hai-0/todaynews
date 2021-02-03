@@ -14,7 +14,8 @@ import Zhibo from './components/zhibo'
 import Shuma from './components/shuma'
 import Caijing from './components/caijing'
 import Login from './components/login'
-import Me from './components/me'
+import Me from './components/me';
+import Content from './components/content'
 
 
 class App extends React.Component {
@@ -70,6 +71,7 @@ class App extends React.Component {
                             <Route path="/yule" component={Yule}/>
                             <Route path="/shuma" component={Shuma}/>
                             <Route path="/caijing" component={Caijing}/>
+                            <Route path={'/content/:id'} component={Content}></Route>
                         </div>
 
                         <div className={'right'}>
@@ -82,7 +84,7 @@ class App extends React.Component {
                         </div>
 
                     </div>
-                    <Me/>
+                    {/*<Me/>*/}
                 </div>
 
 

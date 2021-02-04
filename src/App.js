@@ -16,6 +16,7 @@ import Caijing from './components/caijing'
 import Login from './components/login'
 import Me from './components/me';
 import Content from './components/content'
+import LoginPage from './components/loginPage/loginPage'
 
 
 class App extends React.Component {
@@ -72,6 +73,7 @@ class App extends React.Component {
                             <Route path="/shuma" component={Shuma}/>
                             <Route path="/caijing" component={Caijing}/>
                             <Route path={'/content/:id'} component={Content}></Route>
+                            <Route path={'/loginPage'} component={LoginPage}></Route>
                         </div>
 
                         <div className={'right'}>

@@ -7,3 +7,8 @@
     * phoneNumber: String   需要验证（用于登录）
     * token 用于鉴权
 2.  
+
+# API
+1. Session
+   * POST: phoneNumber, password
+   * Response: {success(failed代表失败，success代表成功), sessionToken}

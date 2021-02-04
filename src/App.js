@@ -36,7 +36,6 @@ class App extends React.Component {
     searchMsgB = () => {
         this.searchMsgK();
     }
-
 //<Route path={'/loginPage'} component={LoginPage}></Route>
     render() {
         return (

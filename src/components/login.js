@@ -1,4 +1,5 @@
 import React from 'react';
+import {withRouter} from 'react-router-dom';
 
 class Login extends React.Component {
     constructor(props) {
@@ -6,7 +7,7 @@ class Login extends React.Component {
     }
 
     loginEvent = () => {
-
+        this.props.history.push('/loginPage')
     }
 
     render() {
@@ -23,4 +24,4 @@ class Login extends React.Component {
     }
 }
 
-export default Login;
+export default withRouter(Login);

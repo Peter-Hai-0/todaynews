@@ -23,6 +23,7 @@ code {
   color: white;
   height: 30px;
   white-space: nowrap;
+  min-width: 1054px;
 }
 
 .weather {
@@ -234,7 +235,7 @@ code {
 
 /*详情页面样式*/
 .content img {
-  max-width: 640px;
+  width: 640px;
   margin-top: 5px;
   margin-bottom: 5px;
 }
@@ -244,4 +245,75 @@ code {
   margin-top: 5px;
   margin-bottom: 5px;
   white-space: pre-wrap;
+}
+
+/*评论样式*/
+.comment {
+  margin-top: 40px;
+}
+
+.total1 {
+  color: red;
+  font-size: 24px;
+  font-family: Algerian;
+  margin-right: 2px;
+}
+
+.comment-input {
+  width: 640px;
+  display: flex;
+  flex-direction: row;
+  height: 45px;
+  margin-left: 42px;
+  margin-bottom: 10px;
+}
+
+.comment-input textarea {
+  width: 540px;
+  height: 30px;
+  padding-left: 5px;
+  font-size: 18px;
+  position: relative;
+  padding-top: 10px;
+}
+
+.comment-input button {
+  color: white;
+  height: 45px;
+  background: black;
+
+}
+
+.comment-writer {
+  list-style: none;
+  margin-left: 42px;
+
+}
+
+.user-info {
+  color: darkmagenta;
+}
+
+.comment-detail p {
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+.comment-reply {
+  margin-bottom: 20px;
+  font-size: 12px;
+}
+
+.comment-like {
+  float: right;
+  right: 2px;
+}
+
+.comment-like a {
+  margin-right: 5px;
+}
+
+.comment-like img {
+  height: 12px;
+
 }

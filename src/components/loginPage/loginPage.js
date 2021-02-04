@@ -1,4 +1,5 @@
 import React from 'react';
+import Modal from 'react-modal'
 
 class LoginPage extends React.Component {
     constructor(props) {
@@ -6,6 +7,7 @@ class LoginPage extends React.Component {
         this.state = {
             phoneNumber: '',
             password: '',
+            visibled: false
         }
     }
 
@@ -16,26 +18,33 @@ class LoginPage extends React.Component {
             [name]: target.value
         });
     }
+    handleSubmit = () => {
+        this.props.onClose();
+    }
 
-    handleSubmit = (event) => {
+    componentDidUpdate() {
 
     }
 
     render() {
         return(
-            <div>
-                <form onSubmit={this.handleSubmit}>
-                    <label>
-                        手机号码:
-                        <input type="tel" name="phoneNumber" value={this.state.phoneNumber} onChange={this.handleChange} />
-                    </label>
-                    <label>
-                        密码：
-                        <input type="password" name="password" value={this.state.password} onChange={this.handleChange}/>
-                    </label>
-                    <input type="submit" value="提交" />
+            <Modal isOpen={this.props.modalIsopen} ariaHideApp={!this.props.modalIsopen} className={'modal'}>
+                <form>
+                    <h2>迷你版今日头条</h2>
+                    <p>登录</p>
+                    <div className={'label-phone'}>
+                        <a>手机号码</a>
+                        <input type="tel" name="phoneNumber"/>
+                    </div>
+                    <br/>
+                    <div className={'label-code'}>
+                        <a>密码</a>
+                        <input type="password" name="password"/>
+                    </div>
+                    <br/>
+                    <input type="submit" value="提交" onSubmit={this.handleSubmit} className={'submit'}/>
                 </form>
-            </div>
+            </Modal>
         )
     }
 }

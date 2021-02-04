@@ -37,12 +37,13 @@ class App extends React.Component {
         this.searchMsgK();
     }
 
+//<Route path={'/loginPage'} component={LoginPage}></Route>
     render() {
         return (
             <Router>
                 <div className={'body'}>
                     < Head/>
-                    <header className="title">今日头条
+                    <header className="title">迷你版今日头条
                         <div className="search-wrapper" style={{float: 'right'}}>
                             <input ref={(input) => this.inputValue = input} onKeyUp={this.searchMsgK}
                                    placeholder="搜索站内资讯、视频或用户"/>
@@ -73,7 +74,7 @@ class App extends React.Component {
                             <Route path="/shuma" component={Shuma}/>
                             <Route path="/caijing" component={Caijing}/>
                             <Route path={'/content/:id'} component={Content}></Route>
-                            <Route path={'/loginPage'} component={LoginPage}></Route>
+
                         </div>
 
                         <div className={'right'}>

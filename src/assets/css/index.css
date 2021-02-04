@@ -53,8 +53,10 @@ code {
 /* 今日头条标题样式*/
 .title {
   color: red;
-  font-size: 25px;
+  font-size: 35px;
   text-align: center;
+  font-family: 华文彩云;
+  margin-top: 10px;
 }
 
 /*今日头条路由样式*/
@@ -234,6 +236,9 @@ code {
 }
 
 /*详情页面样式*/
+.content {
+  width: 640px;
+}
 .content img {
   width: 640px;
   margin-top: 5px;
@@ -315,5 +320,48 @@ code {
 
 .comment-like img {
   height: 12px;
+}
 
+/*登录弹窗样式*/
+.modal {
+  height: 250px;
+  width: 400px;
+  background: #f5f5f5;
+  margin-left: 30%;
+  margin-top: 200px;
+}
+
+.modal h2 {
+  text-align: center;
+  font-family: 方正舒体;
+  color: red;
+  margin-bottom: 5px;
+}
+
+.modal p {
+  text-align: center;
+  font-weight: bold;
+}
+
+.label-phone {
+  margin-top: 10px;
+}
+
+.label-phone a {
+  width: 80px;
+  margin-left: 30px;
+  margin-right: 20px;
+  color: black;
+}
+
+.label-code a {
+  width: 80px;
+  margin-left: 45px;
+  margin-right: 37px;
+  color: black;
+}
+
+.submit {
+  margin-left: 175px;
+  background: aquamarine;
 }

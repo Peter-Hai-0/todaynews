@@ -58,7 +58,7 @@ class Login extends React.Component {
                 if (res.data.result.name == this.refs.s_name.value) {
                     alert("注册成功")
                 }
-                else alert("注册失败")
+                else alert("注册失败");
             })
     }
     exitEvent = () => {

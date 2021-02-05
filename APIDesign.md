@@ -13,7 +13,10 @@
 # API
 1. Session
    * POST: phoneNumber, password<br>Response: 200:{sessionToken}, 403
-   * DELETE: sessionToken<br>Response: 200:{}, 403
+   * DELETE: sessionToken<br>Response: 200, 403
 
 2. User
    * POST: name, password, phoneNumber<br> Response: 200, 403
+
+3. userNews
+   * GET: name=?<br> Response: 200{news[{_id, title}...]}, 404

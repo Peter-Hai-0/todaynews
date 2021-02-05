@@ -1,4 +1,6 @@
 import React from 'react';
+import cookie from 'react-cookies'
+import axios from "axios";
 import Modal from 'react-modal'
 
 class LoginPage extends React.Component {
@@ -22,9 +24,24 @@ class LoginPage extends React.Component {
         this.props.onClose();
     }
 
-    componentDidUpdate() {
-
+    handleSubmit = (event) => {
+        event.preventDefault();
+        const data = JSON.stringify(this.state);
+        const apiUrl = "https://qc8vvg.fn.thelarkcloud.com/postSession";
+        let sessionToken = "";
+        axios.post(apiUrl, data).then(response => {
+            console.log(data);
+            console.log(response);
+            if (response.status == 200) {
+                cookie.save("sessionToken", response.data.sessionToken);
+            } else {
+                alert("登陆失败")
+            }
+        })
     }
+    componentDidUpdate(){
+
+        }
 
     render() {
         return(

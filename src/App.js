@@ -16,6 +16,7 @@ import Caijing from './components/caijing'
 import Login from './components/login'
 import Me from './components/me';
 import Content from './components/content'
+import Edit from './components/Edit'
 import LoginPage from './components/loginPage/loginPage'
 
 
@@ -58,7 +59,7 @@ class App extends React.Component {
                         </div>
                     </header>
                     <br/>
-                    <div className="tab">
+                    <div className="tab" id={"tab"}>
                         <Link to="/">推荐</Link>
                         <Link to="/redian">热点</Link>
                         <Link to="/keji">科技</Link>
@@ -80,6 +81,7 @@ class App extends React.Component {
                             <Route path="/shuma" component={Shuma}/>
                             <Route path="/caijing" component={Caijing}/>
                             <Route path={'/content/:id'} component={Content}></Route>
+                            <Route path="/Edit" component={Edit}/>
 
                         </div>
 

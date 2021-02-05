@@ -16,8 +16,10 @@ import Caijing from './components/caijing'
 import Login from './components/login'
 import Me from './components/me';
 import Content from './components/content'
+import Add from './components/Add'
 import Edit from './components/Edit'
-import LoginPage from './components/loginPage/loginPage'
+
+// import LoginPage from './components/loginPage/loginPage'
 
 
 class App extends React.Component {
@@ -81,6 +83,7 @@ class App extends React.Component {
                             <Route path="/shuma" component={Shuma}/>
                             <Route path="/caijing" component={Caijing}/>
                             <Route path={'/content/:id'} component={Content}></Route>
+                            <Route path="/Add" component={Add}/>
                             <Route path="/Edit" component={Edit}/>
 
                         </div>

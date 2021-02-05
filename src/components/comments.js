@@ -11,12 +11,16 @@ class Comments extends React.Component {
             commentlist: [],
             textarea_heigh: 'auto',
             likesrc: like_0,
-            likeChanged: false
+            likeChanged: false,
+            index: [],
+
         }
     }
 
 //
     //6017fbb1c280fd0041e06074
+    //
+    //
     callAPI = () => {
         axios.get('https://qc8vvg.fn.thelarkcloud.com/getcomment?_id=6018f0e4b588ae021ac5ac91')
             .then((res) => {
@@ -49,18 +53,13 @@ class Comments extends React.Component {
         })
     }
     changeLike = (key) => {
-        if (!this.state.likeChanged) {
-            this.setState({
-                likesrc: like_1,
-                likeChanged: true
-            })
-        } else {
-            this.setState({
-                likesrc: like_0,
-                likeChanged: false
-            })
-        }
-        alert(key)
+
+
+    }
+    showLike = (key) => {
+        if (this.state.index[key] == true) {
+            return like_1;
+        } else return like_0;
     }
 
     render() {
@@ -97,11 +96,10 @@ class Comments extends React.Component {
                                                 <p>{value.content}</p>
                                             </div>
                                             <div className={'comment-reply'}>
-                                                <a className={'comment-reply'}>回复 {value.reply_num}</a>
+                                                <a className={'comment-reply'} onM>回复 {value.reply_num}</a>
                                                 <div className={'comment-like'}>
                                                     <a>{value.like.length}</a>
-                                                    <img src={this.state.likesrc}
-                                                         onClick={this.changeLike.bind(this, key)}/>
+                                                    <img src={this.showLike(key)} onClick={this.changeLike}/>
                                                 </div>
                                             </div>
                                         </li>

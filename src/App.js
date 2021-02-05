@@ -23,8 +23,15 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            inputValue: ''
+            inputValue: '',
+            user_info: {}
         }
+    }
+
+    set_user_info = (user_obj) => {
+        this.setState({
+            user_info: user_obj
+        })
     }
 
     searchMsgK = (e) => {
@@ -78,7 +85,11 @@ class App extends React.Component {
 
                         <div className={'right'}>
                             <div>
-                                <Login/>
+                                <Login set_user_info={this.set_user_info}/>
+                                <button onClick={() => {
+                                    alert(this.state.user_info.name)
+                                }}>show父组件state
+                                </button>
                                 <hr color={'red'}/>
                                 <Tail/>
                             </div>

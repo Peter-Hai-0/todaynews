@@ -45,7 +45,21 @@ class Login extends React.Component {
         ;
     }
     SignUpEvent = () => {
-        alert("注册");
+        if (this.refs.s_password.value != this.refs.again_password.value) {
+            alert("两次密码不同")
+            return
+        }
+        axios.post("https://qc8vvg.fn.thelarkcloud.com/signup",
+            {
+                s_name: this.refs.s_name.value,
+                s_password: this.refs.s_password.value
+            })
+            .then((res) => {
+                if (res.data.result.name == this.refs.s_name.value) {
+                    alert("注册成功")
+                }
+                else alert("注册失败")
+            })
     }
     exitEvent = () => {
         this.setState({
@@ -92,16 +106,19 @@ class Login extends React.Component {
                 <p className={"capture"}>登录后可以保存您的浏览喜好、评论、收藏</p>
                 <p className={"capture"}> 并与APP同步，更可以发布微头条</p>
                 <div className={"log_form"}>
-                    <form action={""}>
-                        <input placeholder={"账号/手机号"} type="text" name={"_username"}/>
-                        <input placeholder={"密码"} type="password" name={"_pwd"}/>
-                        <input placeholder={"再次输入密码"} type="password" name={"again_pwd"}/>
-                        <button onClick={this.SignUpEvent}> 注册</button>
-                        <div className={"signup"} onClick={() => {
-                            this.setState({view: 'signin'})
-                        }}>已有账号，直接登录
-                        </div>
+                    <form action={"https://qc8vvg.fn.thelarkcloud.com/signup"} target={"respon"}
+                          method={"POST"}>
+                        <input placeholder={"账号/手机号"} type="text" ref={"s_name"}/>
+                        <input placeholder={"密码"} type="password" ref={"s_password"}/>
+                        <input placeholder={"再次输入密码"} type="password" ref={"again_password"}/>
+
                     </form>
+                    <button onClick={this.SignUpEvent}> 注册</button>
+                    <div className={"signup"} onClick={() => {
+                        this.setState({view: 'signin'})
+                    }}>已有账号，直接登录
+                    </div>
+                    <iframe id={"respon"}></iframe>
                 </div>
             </div>
     }

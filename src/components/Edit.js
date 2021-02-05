@@ -15,9 +15,23 @@ class Edit extends React.Component {
         document.getElementById("tab").style.visibility = "hidden"
     }
 
-    clicked = () => {
-        this.setState({view: "edit", article: {title: "q", writer: "w", detail: "e"}})
-        // this.inner_data()
+    handleclicked = (_id) => {
+        axios.get("https://qc8vvg.fn.thelarkcloud.com/query?_id=" + _id)
+            .then((res) => {
+                this.setState({view: "edit",
+                    article: {
+                        title: res.data.result.title,
+                        writer: res.data.result.writer,
+                        detail: res.data.result.detail
+                    }
+                });
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
+    updatenews = () => {
+        alert("修改成功")
     }
 
 
@@ -35,14 +49,16 @@ class Edit extends React.Component {
                 <textarea name={"detail"} id={"detail"} ref={"detail"} placeholder={"请在此处输入内容"}
                           value={this.state.article.detail}/>
                 <div>
-                    <button onClick={this.add_news}>提交</button>
+                    <button onClick={this.updatenews}>提交</button>
                 </div>
             </div>
         )
         //文章列表界面
         else if (this.state.view == "choose") return (<div>
-                <h2>我的文章列表</h2>
-                <button onClick={this.clicked}>编辑</button>
+                <h2>我的文章列表:</h2>
+                <p onClick={this.handleclicked.bind(this, "601a8c86f950a8000a421db2")}>文章一</p><br/>
+                <p onClick={this.handleclicked.bind(this, "601a8c86f950a8000a421db2")}>文章二</p><br/>
+                <p onClick={this.handleclicked.bind(this, "601a8c86f950a8000a421db2")}>文章三</p><br/>
             </div>
 
 

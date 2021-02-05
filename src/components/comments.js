@@ -96,7 +96,7 @@ class Comments extends React.Component {
                                                 <p>{value.content}</p>
                                             </div>
                                             <div className={'comment-reply'}>
-                                                <a className={'comment-reply'} onM>回复 {value.reply_num}</a>
+                                                <a className={'comment-reply'} >回复 {value.reply_num}</a>
                                                 <div className={'comment-like'}>
                                                     <a>{value.like.length}</a>
                                                     <img src={this.showLike(key)} onClick={this.changeLike}/>

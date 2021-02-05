@@ -97,6 +97,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/assets/images" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -111,6 +112,9 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\zhang\OneDrive\Desktop\todaynews\src\assets\images" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Download\pycharm\Workplace\todaynews\src\assets\css" />
       <recent name="D:\Download\pycharm\Workplace\todaynews\src\components" />
@@ -149,7 +153,7 @@
       <workItem from="1612409311605" duration="8519000" />
       <workItem from="1612429182850" duration="4131000" />
       <workItem from="1612519009256" duration="1551000" />
-      <workItem from="1612520675611" duration="633000" />
+      <workItem from="1612520675611" duration="2495000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1612166749801</created>

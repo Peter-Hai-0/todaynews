@@ -1,6 +1,7 @@
 import React from 'react';
 import {Route, Link} from 'react-router-dom';
 import axios from "axios";
+import Comment from './comments';
 
 class Content extends React.Component {
     constructor(props) {
@@ -33,7 +34,7 @@ class Content extends React.Component {
             if (item == null) break;
             pic.push(item[0]);
             tail = item.index + tail + 1;
-            console.log(item.index)
+            //console.log(item.index)
             str = str.substring(item.index + 1);
             len = item[0].length + 1;
             if (tail == 0) {
@@ -44,7 +45,7 @@ class Content extends React.Component {
             } else {
 
                 var content = {};
-                console.log(h, tail - 1)
+                //console.log(h, tail - 1)
                 content = {content: str_cp.slice(h, tail - 1)};
                 //console.log(len,temp,h,content)
                 changeddetail.push(content);
@@ -55,7 +56,7 @@ class Content extends React.Component {
                 h = tail + len;
             }
 
-            console.log(tail, str)
+            //console.log(tail, str)
         }
         if (h < str_cp.length) {
             var content = {};
@@ -66,7 +67,7 @@ class Content extends React.Component {
         this.setState({
             detail: changeddetail
         })
-        console.log(this.state.detail)
+        //console.log(this.state.detail)
         console.log(pic)
     }
 
@@ -124,7 +125,9 @@ class Content extends React.Component {
                             )
                         })
                     }
-
+                </div>
+                <div>
+                    <Comment/>
                 </div>
 
             </div>

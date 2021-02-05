@@ -23,8 +23,15 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            inputValue: ''
+            inputValue: '',
+            user_info: {}
         }
+    }
+
+    set_user_info = (user_obj) => {
+        this.setState({
+            user_info: user_obj
+        })
     }
 
     searchMsgK = (e) => {
@@ -36,13 +43,13 @@ class App extends React.Component {
     searchMsgB = () => {
         this.searchMsgK();
     }
-
+//<Route path={'/loginPage'} component={LoginPage}></Route>
     render() {
         return (
             <Router>
                 <div className={'body'}>
                     < Head/>
-                    <header className="title">今日头条
+                    <header className="title">迷你版今日头条
                         <div className="search-wrapper" style={{float: 'right'}}>
                             <input ref={(input) => this.inputValue = input} onKeyUp={this.searchMsgK}
                                    placeholder="搜索站内资讯、视频或用户"/>
@@ -73,12 +80,16 @@ class App extends React.Component {
                             <Route path="/shuma" component={Shuma}/>
                             <Route path="/caijing" component={Caijing}/>
                             <Route path={'/content/:id'} component={Content}></Route>
-                            <Route path={'/loginPage'} component={LoginPage}></Route>
+
                         </div>
 
                         <div className={'right'}>
                             <div>
-                                <Login/>
+                                <Login set_user_info={this.set_user_info}/>
+                                <button onClick={() => {
+                                    alert(this.state.user_info.name)
+                                }}>show父组件state
+                                </button>
                                 <hr color={'red'}/>
                                 <Tail/>
                             </div>

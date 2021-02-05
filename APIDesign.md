@@ -20,3 +20,4 @@
 
 3. userNews
    * GET: name=?<br> Response: 200{news[{_id, title}...]}, 404
+   * PATCH: _id, title, detail, writer<br> Resonse: 200, 403

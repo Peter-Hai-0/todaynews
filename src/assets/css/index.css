@@ -121,7 +121,7 @@ code {
   margin: 10px 10px;
   border: 1px solid #e8e8e8;
     background: azure;
-  height: 160px;
+    height: 190px;
     child-align: middle;
 }
 
@@ -145,7 +145,7 @@ code {
 }
 
 .login-box button {
-  background: red;
+    background: brown;
   color: white;
     /*width: 50%;*/
     /*height: 20%;*/
@@ -162,7 +162,7 @@ code {
 }
 
 .add_news button {
-    background: red;
+    background: brown;
     color: white;
     /*width: 50%;*/
     /*height: 20%;*/
@@ -191,21 +191,25 @@ code {
     font-size: 10px;
 }
 
-.edit {
+.add_article {
     background-color: #e8e8e8;
     text-align: center;
     width: 100%;
-    height: 200%;
+    border: 2px solid #cccccc;
 }
 
-.edit label {
-    margin-left: 0%;
+.add_article hr {
+    background-color: brown;
 }
 
-.edit input {
+.add_article label {
+    color: brown;
+}
+
+.add_article input {
     margin-top: 2%;
-    width: 50%;
-    height: 18px;
+    width: 30%;
+    padding-top: 2px;
 }
 
 #laiyuan {
@@ -213,15 +217,70 @@ code {
     height: 18px;
 }
 
-.edit textarea {
+.add_article textarea {
     /*padding-top: 10%;*/
     margin-top: 5%;
     resize: none;
     width: 70%;
+    min-height: 600px;
 
 }
 
-.edit
+.add_article button {
+    background: brown;
+    color: white;
+    width: 190px;
+    height: 24px;
+    text-align: center;
+}
+
+#succ_add {
+    color: brown;
+}
+
+.edit_article {
+    background-color: #e8e8e8;
+    text-align: center;
+    width: 30%%;
+    border: 2px solid #cccccc;
+}
+
+.edit_article hr {
+    background-color: brown;
+}
+
+.edit_article label {
+    color: brown;
+}
+
+.edit_article input {
+    margin-top: 2%;
+    width: 30%;
+    padding-top: 2px;
+}
+
+#laiyuan {
+    width: 15%;
+    height: 18px;
+}
+
+.edit_article textarea {
+    /*padding-top: 10%;*/
+    margin-top: 5%;
+    resize: none;
+    width: 70%;
+    min-height: 600px;
+
+}
+
+.edit_article button {
+    background: brown;
+    color: white;
+    width: 190px;
+    height: 24px;
+    text-align: center;
+}
+
 /*文章列表样式*/
 .list_box {
   height: 60px;
@@ -310,16 +369,16 @@ code {
 
 }
 
-.edit ul {
+.add ul {
   font-size: 20px;
   margin-left: 30%;
 }
 
-.edit input {
+.add input {
   height: 25px;
 }
 
-.edit textarea {
+.add textarea {
   height: 200px;
 }
 

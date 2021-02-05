@@ -1,5 +1,7 @@
 import React from 'react';
 import {withRouter} from 'react-router-dom';
+import axios from 'axios'
+import {Link} from 'react-router-dom'
 
 class Login extends React.Component {
     constructor(props) {
@@ -9,63 +11,96 @@ class Login extends React.Component {
             info: {
                 head_img: "",
                 name: "NOMAD",
-                sex: '男'
+                sex: ""
             }
         }
     }
 
     loginEvent = () => {
-        // document.getElementById("signin_form").submit()
-        this.props.set_user_info(this.state.info);
-        this.setState({
-            view: 'signok'
+        axios.post("https://qc8vvg.fn.thelarkcloud.com/test_add", {
+            name: this.refs.username.value,
+            password: this.refs.password.value
         })
+            .then((res) => {
+                // if(res.data)
+                console.log(res)
+                this.setState({
+                    info: {
+                        head_img: res.data.result.head_img,
+                        name: res.data.result.name,
+                        sex: res.data.result.sex
+                    },
+                    view: 'signok',
+                })
+                this.props.set_user_info(this.state.info);
+            })
+            .catch((err) => {
+                document.getElementById("wrong").innerHTML = "密码错误";
+                // setTimeout(document.getElementById("wrong").innerHTML = "",2000);
+                console.log(err)
+            })
+
     }
     AddEvent = () => {
-        alert("发布文章");
+        ;
+    }
+    SignUpEvent = () => {
+        alert("注册");
+    }
+    exitEvent = () => {
+        this.setState({
+            view: 'signin'
+        })
+        this.props.set_user_info({})
     }
 
     render() {
+        //已登录
         if (this.state.view == 'signok') return (<div className={'login-box'}>
-            <div className={"right-text"} onClick={() => {
-                this.setState({view: 'signin'})
-            }}>退出登录
+            <div className={"right-text"} onClick={this.exitEvent}>退出登录
             </div>
-            <img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3649178992,1821853682&fm=26&gp=0.jpg"/>
+            <img src={this.state.info.head_img}/>
             <br/><p><strong>昵称：</strong>{this.state.info.name}</p>
             <p>性别：{this.state.info.sex}</p>
-            <button onClick={this.AddEvent}>发布文章</button>
-
-
+            <Link to={"/Add"}>
+                <button onClick={this.AddEvent} id={"fabu"}>发布文章</button>
+            </Link>
+            <Link to={"/Edit"}>
+                <button onClick={this.AddEvent} id={"fabu"}>编辑文章</button>
+            </Link>
         </div>)
+        //登录
         else if (this.state.view == 'signin') return (<div className={'login-box'}>
             <p className={"capture"}>登录后可以保存您的浏览喜好、评论、收藏</p>
             <p className={"capture"}> 并与APP同步，更可以发布微头条</p>
             <div className={"log_form"}>
-                <form action={"https://qc8vvg.fn.thelarkcloud.com/add"} id={"signin_form"} target={"respon"}
+                <form action={"https://qc8vvg.fn.thelarkcloud.com/add"} target={"respon"}
                       method={"POST"}>
-                    <input placeholder={"账号/手机号"} type="text" name={"account"}/>
-                    <input placeholder={"密码"} type="password" name={"password"}/>
-                    <button onClick={this.loginEvent} type={'submit'}> 登录</button>
+                    <input placeholder={"账号/手机号"} type="text" ref={"username"}/>
+                    <input placeholder={"密码"} type="password" ref={"password"}/>
                 </form>
-                {/*<button onClick={this.loginEvent}> 登录</button>*/}
+                <button onClick={this.loginEvent}> 登录</button>
+                <p id={"wrong"}></p>
             </div>
             <div className={"signup"} onClick={() => {
                 this.setState({view: 'signup'})
             }}>注册账号
             </div>
-            {/*<iframe name={"respon"}></iframe>*/}
-            <p name="respon"></p>
         </div>)
+        //注册
         else return <div className={'login-box'}>
                 <p className={"capture"}>登录后可以保存您的浏览喜好、评论、收藏</p>
                 <p className={"capture"}> 并与APP同步，更可以发布微头条</p>
                 <div className={"log_form"}>
                     <form action={""}>
-                        <input placeholder={"账号/手机号"} type="text" name={"account"}/>
-                        <input placeholder={"密码"} type="password" name={"password"}/>
-                        <input placeholder={"再次输入密码"} type="password" name={"_password"}/>
-                        <button onClick={this.loginEvent} type={'submit'}> 注册</button>
+                        <input placeholder={"账号/手机号"} type="text" name={"_username"}/>
+                        <input placeholder={"密码"} type="password" name={"_pwd"}/>
+                        <input placeholder={"再次输入密码"} type="password" name={"again_pwd"}/>
+                        <button onClick={this.SignUpEvent}> 注册</button>
+                        <div className={"signup"} onClick={() => {
+                            this.setState({view: 'signin'})
+                        }}>已有账号，直接登录
+                        </div>
                     </form>
                 </div>
             </div>

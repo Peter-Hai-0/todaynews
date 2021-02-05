@@ -12,5 +12,5 @@
 
 # API
 1. Session
-   * POST: phoneNumber, password<br>Response: {success(failed代表失败，success代表成功), sessionToken}
-   * DELETE: 用于logout
+   * POST: phoneNumber, password<br>Response: 200:{sessionToken}, 403
+   * DELETE: sessionToken<br>Response: 200:{}, 403

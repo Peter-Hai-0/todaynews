@@ -32,7 +32,7 @@ class LoginPage extends React.Component {
         axios.post(apiUrl, data).then(response => {
             console.log(data);
             console.log(response);
-            if (response.data.success == "success") {
+            if (response.status == 200) {
                 cookie.save("sessionToken", response.data.sessionToken);
             } else {
                 alert("登陆失败")

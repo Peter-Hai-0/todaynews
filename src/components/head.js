@@ -26,7 +26,8 @@ class Head extends React.Component {
                     <a className="city">{this.state.list.city}</a>
                     <a className="city_weather">{this.state.list.weather}</a>
                     <a className="city_temperature">{this.state.list.temperature} ℃</a>
-                    <button className="zhuce" style={{float: 'right'}} onClick={this.zhuce}> 注册头条号</button>
+                    <button className="zhuce" style={{float: 'right'}} onClick={this.zhuce}><strong
+                        id={"username_value"}></strong></button>
                 </div>
             </div>
         )

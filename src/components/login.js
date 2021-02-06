@@ -10,7 +10,7 @@ class Login extends React.Component {
             view: 'signin',
             info: {
                 head_img: "",
-                name: "NOMAD",
+                name: "",
                 sex: ""
             }
         }
@@ -57,6 +57,12 @@ class Login extends React.Component {
             .then((res) => {
                 if (res.data.result.name == this.refs.s_name.value) {
                     alert("注册成功")
+                    this.setState({
+                        view: "signok", info: {
+                            head_img: "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3511863988,1526043200&fm=11&gp=0.jpg"
+                            , name: res.data.result.name, sex: "未知"
+                        }
+                    })
                 }
                 else alert("注册失败");
             })
@@ -118,7 +124,7 @@ class Login extends React.Component {
                         this.setState({view: 'signin'})
                     }}>已有账号，直接登录
                     </div>
-                    <iframe id={"respon"}></iframe>
+                    {/*<iframe id={"respon"}></iframe>*/}
                 </div>
             </div>
     }

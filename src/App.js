@@ -84,7 +84,7 @@ class App extends React.Component {
                             <Route path="/caijing" component={Caijing}/>
                             <Route path={'/content/:id'} component={Content}></Route>
                             <Route path="/Add" component={Add}/>
-                            <Route path="/Edit" component={Edit}/>
+                            <Route path="/Edit/:name" component={Edit}/>
 
                         </div>
 
@@ -93,7 +93,7 @@ class App extends React.Component {
                                 <Login set_user_info={this.set_user_info}/>
                                 <button onClick={() => {
                                     alert(this.state.user_info.name)
-                                }}>show父组件state
+                                }}>show父组件user_info.name
                                 </button>
                                 <hr color={'red'}/>
                                 <Tail/>

@@ -1,7 +1,8 @@
 import React from 'react';
 import {withRouter} from 'react-router-dom';
 import axios from 'axios'
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+
 
 class Login extends React.Component {
     constructor(props) {
@@ -18,8 +19,8 @@ class Login extends React.Component {
 
     loginEvent = () => {
         axios.post("https://qc8vvg.fn.thelarkcloud.com/test_add", {
-            name: this.refs.username.value,
-            password: this.refs.password.value
+            name: this.username.value,
+            password: this.password.value
         })
             .then((res) => {
                 // if(res.data)
@@ -33,10 +34,11 @@ class Login extends React.Component {
                     view: 'signok',
                 })
                 this.props.set_user_info(this.state.info);
+                document.getElementById("username_value").innerHTML = this.state.info.name
             })
             .catch((err) => {
-                document.getElementById("wrong").innerHTML = "密码错误";
-                // setTimeout(document.getElementById("wrong").innerHTML = "",2000);
+                //document.getElementById("wrong").innerHTML = "密码错误";
+                //setTimeout(document.getElementById("wrong").innerHTML = "",2000);
                 console.log(err)
             })
 
@@ -45,17 +47,17 @@ class Login extends React.Component {
         ;
     }
     SignUpEvent = () => {
-        if (this.refs.s_password.value != this.refs.again_password.value) {
+        if (this.s_password.value != this.again_password.value) {
             alert("两次密码不同")
             return
         }
         axios.post("https://qc8vvg.fn.thelarkcloud.com/signup",
             {
-                s_name: this.refs.s_name.value,
-                s_password: this.refs.s_password.value
+                s_name: this.s_name.value,
+                s_password: this.s_password.value
             })
             .then((res) => {
-                if (res.data.result.name == this.refs.s_name.value) {
+                if (res.data.result.name == this.s_name.value) {
                     alert("注册成功")
                     this.setState({
                         view: "signok", info: {
@@ -63,8 +65,7 @@ class Login extends React.Component {
                             , name: res.data.result.name, sex: "未知"
                         }
                     })
-                }
-                else alert("注册失败");
+                } else alert("注册失败");
             })
     }
     exitEvent = () => {
@@ -72,6 +73,7 @@ class Login extends React.Component {
             view: 'signin'
         })
         this.props.set_user_info({})
+        document.getElementById("username_value").innerHTML = ""
     }
 
     render() {
@@ -85,7 +87,7 @@ class Login extends React.Component {
             <Link to={"/Add"}>
                 <button onClick={this.AddEvent} id={"fabu"}>发布文章</button>
             </Link>
-            <Link to={"/Edit"}>
+            <Link to={"/Edit/" + this.state.info.name}>
                 <button onClick={this.AddEvent} id={"fabu"}>编辑文章</button>
             </Link>
         </div>)
@@ -96,8 +98,8 @@ class Login extends React.Component {
             <div className={"log_form"}>
                 <form action={"https://qc8vvg.fn.thelarkcloud.com/add"} target={"respon"}
                       method={"POST"}>
-                    <input placeholder={"账号/手机号"} type="text" ref={"username"}/>
-                    <input placeholder={"密码"} type="password" ref={"password"}/>
+                    <input placeholder={"账号/手机号"} type="text" ref={(input) => this.username = input}/>
+                    <input placeholder={"密码"} type="password" ref={(input) => this.password = input}/>
                 </form>
                 <button onClick={this.loginEvent}> 登录</button>
                 <p id={"wrong"}></p>
@@ -114,9 +116,9 @@ class Login extends React.Component {
                 <div className={"log_form"}>
                     <form action={"https://qc8vvg.fn.thelarkcloud.com/signup"} target={"respon"}
                           method={"POST"}>
-                        <input placeholder={"账号/手机号"} type="text" ref={"s_name"}/>
-                        <input placeholder={"密码"} type="password" ref={"s_password"}/>
-                        <input placeholder={"再次输入密码"} type="password" ref={"again_password"}/>
+                        <input placeholder={"账号/手机号"} type="text" ref={(input) => this.s_name = input}/>
+                        <input placeholder={"密码"} type="password" ref={(input) => this.s_password = input}/>
+                        <input placeholder={"再次输入密码"} type="password" ref={(input) => this.again_passward = input}/>
 
                     </form>
                     <button onClick={this.SignUpEvent}> 注册</button>

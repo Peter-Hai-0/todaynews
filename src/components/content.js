@@ -2,16 +2,20 @@ import React from 'react';
 import {Route, Link} from 'react-router-dom';
 import axios from "axios";
 import Comment from './comments';
-
+import LikeBtn from './LikeBtn'
+import HateBtn from './HateBtn'
 class Content extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            _id: '',
             detail: [],
             domain: 'https://qc8vvg.fn.thelarkcloud.com/query?_id=',
             title: '',
             writer: '',
             time: '',
+            like: 0,
+            hate: 0,
             comments: [],
         }
     }
@@ -82,8 +86,11 @@ class Content extends React.Component {
         var api = this.state.domain + id;
         axios.get(api)
             .then((res) => {
-                //console.log(res);
+                console.log(res);
                 this.setState({
+                    _id: res.data.result._id,
+                    hate: res.data.result.hate,
+                    like: res.data.result.like,
                     title: res.data.result.title,
                     writer: res.data.result.writer,
                     time: res.data.result.createdAt,
@@ -126,6 +133,9 @@ class Content extends React.Component {
                         })
                     }
                 </div>
+                <LikeBtn article_state={this.state}/>
+                <HateBtn article_state={this.state}/>
+
                 <div>
                     <Comment/>
                 </div>

@@ -82,7 +82,7 @@ class Login extends React.Component {
             <div className={"right-text"} onClick={this.exitEvent}>退出登录
             </div>
             <img src={this.state.info.head_img}/>
-            <br/><p><strong>昵称：</strong>{this.state.info.name}</p>
+            <br/><p>昵称：<strong id={"username"}>{this.state.info.name}</strong></p>
             <p>性别：{this.state.info.sex}</p>
             <Link to={"/Add"}>
                 <button onClick={this.AddEvent} id={"fabu"}>发布文章</button>

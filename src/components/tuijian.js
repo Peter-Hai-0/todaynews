@@ -26,6 +26,7 @@ class Tuijian extends React.Component {
     }
 
     componentDidMount() {
+
         this.callAPI();
 
     }
@@ -54,11 +55,11 @@ class Tuijian extends React.Component {
 
                             <div key={key} className={'list_box'}>
                                 <div className={'list_title'}>
-                                    <Link target="_blank" to={`/content/${value._id}`}>{value.title}</Link>
+                                    <Link target="_self" to={`/content/${value._id}`}>{value.title}</Link>
                                 </div>
                                 <div className={'list_minbox'}>
                                     <a className={'list_res'}>{value.writer}</a>
-                                    <a className={'list_time'}>{value.updatedAt}</a>
+                                    <a className={'list_time'}>{value.updatedAt.substring(0, 10) + ' ' + value.updatedAt.substring(11, 16)}</a>
                                 </div>
                             </div>
 

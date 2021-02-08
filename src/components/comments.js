@@ -3,7 +3,6 @@ import Axios from "axios";
 import like_0 from '../assets/images/like_0.png';
 import like_1 from '../assets/images/like_1.png';
 import me from '../assets/images/me.png'
-import axios from "axios"
 
 class Comments extends React.Component {
     constructor(props) {
@@ -126,12 +125,8 @@ class Comments extends React.Component {
         }
         ;
     }
-
     replyEvent = () => {
-        axios.post("https://qc8vvg.fn.thelarkcloud.com/commentContent", {_id: this.props.aid, s: ''})
-            .then((res) => {
-                console.log(res)
-            })
+
     }
 //判断是否登录
     islogin = (name, type) => {
@@ -151,7 +146,6 @@ class Comments extends React.Component {
         }
 
     }
-
     //头像渲染
 
 

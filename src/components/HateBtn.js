@@ -39,6 +39,10 @@ export default class HateBtn extends Component {
     }
 
     handleHate() {
+        if (document.getElementById("username") == null) {
+            alert("您还未登录")
+            return
+        }
         if (this.state.isHated) {
             this.setState({
                 hate_num: this.state.hate_num - 1,

@@ -52,7 +52,9 @@ class App extends React.Component {
             <Router>
                 <div className={'body'}>
                     < Head/>
-                    <header className="title">迷你版今日头条
+                    <header className="title"><Link to={"/"} style={{cursor: "pointer"}} className={'title-text'}>
+                        <h2>迷你版今日头条</h2>
+                    </Link>
                         <div className="search-wrapper" style={{float: 'right'}}>
                             <input ref={(input) => this.inputValue = input} onKeyUp={this.searchMsgK}
                                    placeholder="搜索站内资讯、视频或用户"/>
@@ -63,13 +65,13 @@ class App extends React.Component {
                     <br/>
                     <div className="tab" id={"tab"}>
                         <Link to="/">推荐</Link>
-                        <Link to="/redian">热点</Link>
-                        <Link to="/keji">科技</Link>
-                        <Link to="/zhibo">直播</Link>
-                        <Link to="/youxi">游戏</Link>
-                        <Link to="/yule">娱乐</Link>
-                        <Link to="/shuma">数码</Link>
-                        <Link to="/caijing">财经</Link>
+                        <Link to="/">热点</Link>
+                        <Link to="/">科技</Link>
+                        <Link to="/">直播</Link>
+                        <Link to="/">游戏</Link>
+                        <Link to="/">娱乐</Link>
+                        <Link to="/">数码</Link>
+                        <Link to="/">财经</Link>
                     </div>
                     <br/>
                     <div className={'wrapper'}>

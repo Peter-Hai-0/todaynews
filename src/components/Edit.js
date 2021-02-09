@@ -10,7 +10,9 @@ class Edit extends React.Component {
         this.state = {
             view: "choose",
             article: {_id: "", title: "", writer: "", detail: ""},
-            list: []
+            list: [],
+            color_list: []
+
         }
     }
 
@@ -67,7 +69,11 @@ class Edit extends React.Component {
     componentDidMount() {
         axios.get('https://qc8vvg.fn.thelarkcloud.com/userNews?name=' + this.props.match.params.name)
             .then((res) => {
-                console.log(res);
+                // let origin_list = res.data.news
+                // for(var i=0;i<origin_list.length;i++){
+                //     origin_list[i].color = origin_list[i].online?'blue':'red'
+                // }
+                // console.log(origin_list)
                 this.setState({
                     list: res.data.news
                 })
@@ -75,6 +81,23 @@ class Edit extends React.Component {
             .catch((err) => {
                 console.log(err)
             })
+    }
+
+    changestate = (value) => {
+        axios.post("https://qc8vvg.fn.thelarkcloud.com/change_online", {_id: value._id})
+            .then((res) => {
+                if (res.status == 200) value.online = !value.online
+                this.forceUpdate()
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
+    red = () => {
+        return <small className={'edit-like'} style={{color: 'red'}}>线下</small>
+    }
+    blue = () => {
+        return <small className={'edit-like'} style={{color: 'blue'}}>线上</small>
     }
 
 
@@ -107,18 +130,19 @@ class Edit extends React.Component {
             if (this.state.list.length == 0) {
                 return (
                     <div>
-                        <h2 className={'edit-listno'}>您还没发布文章，快来分享身边有趣的事吧！</h2>
+                        <h3 className={'edit-listno'}>您还没发布文章，快来分享身边有趣的事吧！</h3>
                     </div>
                 )
             } else {
                 return (
                     <div>
-                        <h2>我的文章列表:</h2>
+                        <h3>我的文章列表:</h3>
                         {
                             this.state.list.slice().reverse().map((value, key) => {
                                 return (
                                     <div key={key} className={'edit-list'}>
-                                        <li onClick={this.handleclicked.bind(this, value._id)}>{value.title}</li>
+                                        <li onClick={this.handleclicked.bind(this, value._id)}
+                                            style={{cursor: "pointer"}}>{value.title}</li>
                                         <small
                                             className={'edit-time'}>发布于{this.decodeTimeStamp(new Date(value.createdAt).getTime())}</small>
                                         &nbsp;&nbsp;&nbsp;
@@ -129,6 +153,13 @@ class Edit extends React.Component {
                                         <small className={'edit-like'}>{eval('([' + value.comment_id + '])').length}评论
                                         </small>
                                         &nbsp;&nbsp;&nbsp;
+                                        <small className={'edit-like'}>状态:</small>
+                                        {/*<small className={'edit-like'}  style={{color:this.state.list.color}}>{value.online?'线上':'线下'}</small>*/}
+                                        {value.online ? this.blue() : this.red()}
+                                        &nbsp;&nbsp;&nbsp;
+                                        <small style={{cursor: "pointer"}}
+                                               onClick={this.changestate.bind(this, value)}>●切换状态
+                                        </small>
 
                                         {/*<img src={like_1}/>*/}
                                         <br/>

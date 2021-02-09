@@ -91,10 +91,7 @@ class App extends React.Component {
                         <div className={'right'}>
                             <div>
                                 <Login set_user_info={this.set_user_info}/>
-                                <button onClick={() => {
-                                    alert(this.state.user_info.name)
-                                }}>show父组件user_info.name
-                                </button>
+
                                 <hr color={'red'}/>
                                 <Tail/>
                             </div>

@@ -30,7 +30,7 @@ export default class HateBtn extends Component {
         return (<div>
             <span onClick={this.handleHate.bind(this)}>
                     {
-                        this.state.isHated ? '踩👎' : '踩👎🏿'
+                        this.state.isHated ? '踩😫' : '踩☹'
                     }
                 </span>
                 {this.state.hate_num}

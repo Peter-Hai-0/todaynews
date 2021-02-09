@@ -25,7 +25,6 @@ class Tuijian extends React.Component {
     callAPI = () => {
         axios.get('https://qc8vvg.fn.thelarkcloud.com/newest_', {params: {pageNum: 0, pageSize: 15}})
             .then((res) => {
-                console.log(res);
                 for (var i = 0; i < res.data.newslist.length; i++) {
                     res.data.newslist[i].createdAt = this.decodeTimeStamp(new Date(res.data.newslist[i].createdAt).getTime())
                     res.data.newslist[i].comment_id = eval('([' + res.data.newslist[i].comment_id + '])').length
@@ -39,11 +38,9 @@ class Tuijian extends React.Component {
             })
     }
     loadmore = () => {
-        this.state.news_num = 2 + this.state.news_num
+        this.state.news_num = 3 + this.state.news_num
         axios.get('https://qc8vvg.fn.thelarkcloud.com/newest_', {params: {pageNum: 0, pageSize: this.state.news_num}})
             .then((res) => {
-                console.log(res);
-                this.state.pageNum += 14;
                 for (var i = 0; i < res.data.newslist.length; i++) {
                     res.data.newslist[i].createdAt = this.decodeTimeStamp(new Date(res.data.newslist[i].createdAt).getTime())
                     res.data.newslist[i].comment_id = eval('([' + res.data.newslist[i].comment_id + '])').length
@@ -78,6 +75,11 @@ class Tuijian extends React.Component {
                                     &nbsp;
                                     &nbsp;&nbsp;&nbsp;
                                     <small>{value.comment_id}评论</small>
+                                    &nbsp;&nbsp;&nbsp;
+                                    <small className={'edit-like'}>☺{value.like}</small>
+                                    &nbsp;&nbsp;&nbsp;
+                                    <small className={'edit-like'}>☹{value.hate}</small>
+                                    &nbsp;&nbsp;&nbsp;
                                     {/*&nbsp;&nbsp;&nbsp;<small>👍{value.like.length}</small>*/}
 
                                     {/*{value.hate}*/}

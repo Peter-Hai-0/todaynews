@@ -30,7 +30,7 @@ export default class LikeBtn extends Component {
         return (<div>
             <span onClick={this.handleLike.bind(this)}>
                     {
-                        this.state.isLiked ? '赞👍' : '赞👍🏾'
+                        this.state.isLiked ? '赞😃' : '赞☺'
                     }
                 </span>
                 {this.state.like_num}

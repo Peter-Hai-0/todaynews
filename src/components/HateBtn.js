@@ -30,7 +30,7 @@ export default class HateBtn extends Component {
         return (<div>
             <span onClick={this.handleHate.bind(this)}>
                     {
-                        this.state.isHated ? '踩👎' : '踩👎🏿'
+                        this.state.isHated ? '踩😫' : '踩☹'
                     }
                 </span>
                 {this.state.hate_num}
@@ -39,6 +39,10 @@ export default class HateBtn extends Component {
     }
 
     handleHate() {
+        if (document.getElementById("username") == null) {
+            alert("您还未登录")
+            return
+        }
         if (this.state.isHated) {
             this.setState({
                 hate_num: this.state.hate_num - 1,

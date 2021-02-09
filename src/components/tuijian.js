@@ -2,33 +2,20 @@ import React from 'react';
 import {Router, Route, Link} from 'react-router-dom';
 import Content from './content';
 import axios from 'axios'
+import ReactPullToRefresh from 'react-pull-to-refresh'
 
 class Tuijian extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            list: [
-                // {
-                //     aid: 1,
-                //     title: '河南疫情最新情况',
-                //     resource: '新京报',
-                //     time: '2021.1.2 11:27'
-                // },
-                // {
-                //     aid: 2,
-                //     title: '陕西各高校寒假提前半个月',
-                //     resource: '新闻报',
-                //     time: '2021.1.2 12:39'
-                // },
-            ]
+            list: [],
+            news_num: 15
+
 
         }
     }
 
     componentDidMount() {
-        if (this.contentNode) {
-            this.contentNode.addEventListener('scroll', this.onScrollHandle.bind(this));
-        }
         this.callAPI();
 
     }
@@ -43,47 +30,136 @@ class Tuijian extends React.Component {
 
 //`/content/${value._id}`
     callAPI = () => {
-        axios.get('https://qc8vvg.fn.thelarkcloud.com/newest')
+        axios.get('https://qc8vvg.fn.thelarkcloud.com/newest_', {params: {pageNum: 0, pageSize: 15}})
             .then((res) => {
-                console.log(res);
+                for (var i = 0; i < res.data.newslist.length; i++) {
+                    res.data.newslist[i].createdAt = this.decodeTimeStamp(new Date(res.data.newslist[i].createdAt).getTime())
+                    res.data.newslist[i].comment_id = eval('([' + res.data.newslist[i].comment_id + '])').length
+                }
+                this.setState({
+                    list: res.data.newslist
+                })
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
+    loadmore = () => {
+        this.state.news_num = 3 + this.state.news_num
+        axios.get('https://qc8vvg.fn.thelarkcloud.com/newest_', {params: {pageNum: 0, pageSize: this.state.news_num}})
+            .then((res) => {
+                for (var i = 0; i < res.data.newslist.length; i++) {
+                    res.data.newslist[i].createdAt = this.decodeTimeStamp(new Date(res.data.newslist[i].createdAt).getTime())
+                    res.data.newslist[i].comment_id = eval('([' + res.data.newslist[i].comment_id + '])').length
+                }
                 this.setState({
                     list: res.data.newslist
                 })
 
             })
             .catch((err) => {
-                console.log(err)
+                alert("没有更多")
             })
     }
 
+
     render() {
         return (
-            <div >
+            <div>
+                {/*<button onClick={()=>{alert(this.state.pageNum)}}>show</button>*/}
                 {
                     this.state.list.map((value, key) => {
                         return (
 
                             <div key={key} className={'list_box'}>
                                 <div className={'list_title'}>
-                                    <Link target="_blank" to={`/content/${value._id}`}>{value.title}</Link>
+                                    <Link target="_self" to={`/content/${value._id}`}>{value.title}</Link>
                                 </div>
                                 <div className={'list_minbox'}>
-                                    <a className={'list_res'}>{value.writer}</a>
-                                    <a className={'list_time'}>{value.updatedAt}</a>
+                                    <small className={'list_res_'}>{value.writer}</small>
+                                    &nbsp;&nbsp;&nbsp;
+                                    <small className={'list_time'}>{value.createdAt}</small>
+                                    &nbsp;
+                                    &nbsp;&nbsp;&nbsp;
+                                    <small>{value.comment_id}评论</small>
+                                    &nbsp;&nbsp;&nbsp;
+                                    <small className={'edit-like'}>☺{value.like}</small>
+                                    &nbsp;&nbsp;&nbsp;
+                                    <small className={'edit-like'}>☹{value.hate}</small>
+                                    &nbsp;&nbsp;&nbsp;
+                                    {/*&nbsp;&nbsp;&nbsp;<small>👍{value.like.length}</small>*/}
+
+                                    {/*{value.hate}*/}
                                 </div>
+                                <br/>
                             </div>
 
                         )
                     })
                 }
+                <div id={"nextpage"}>
+                    <button onClick={this.loadmore}>加载更多</button>
+                </div>
             </div>
         )
     }
 
-    componentWillUnmount() {
-        if (this.contentNode) {
-            this.contentNode.removeEventListener('scroll', this.onScrollHandle.bind(this));
+    decodeTimeStamp = (timestamp) => {
+        var arrTimestamp = (timestamp + '').split('');
+        for (var start = 0; start < 13; start++) {
+            if (!arrTimestamp[start]) {
+                arrTimestamp[start] = '0';
+            }
         }
+        timestamp = arrTimestamp.join('') * 1;
+
+        var minute = 1000 * 60;
+        var hour = minute * 60;
+        var day = hour * 24;
+        var halfamonth = day * 15;
+        var month = day * 30;
+        var now = new Date().getTime();
+        var diffValue = now - timestamp;
+
+        // 如果本地时间反而小于变量时间
+        if (diffValue < 0) {
+            return '不久前';
+        }
+
+        // 计算差异时间的量级
+        var monthC = diffValue / month;
+        var weekC = diffValue / (7 * day);
+        var dayC = diffValue / day;
+        var hourC = diffValue / hour;
+        var minC = diffValue / minute;
+
+        // 数值补0方法
+        var zero = function (value) {
+            if (value < 10) {
+                return '0' + value;
+            }
+            return value;
+        };
+
+        // 使用
+        if (monthC > 12) {
+            // 超过1年，直接显示年月日
+            return (function () {
+                var date = new Date(timestamp);
+                return date.getFullYear() + '年' + zero(date.getMonth() + 1) + '月' + zero(date.getDate()) + '日';
+            })();
+        } else if (monthC >= 1) {
+            return parseInt(monthC) + "月前";
+        } else if (weekC >= 1) {
+            return parseInt(weekC) + "周前";
+        } else if (dayC >= 1) {
+            return parseInt(dayC) + "天前";
+        } else if (hourC >= 1) {
+            return parseInt(hourC) + "小时前";
+        } else if (minC >= 1) {
+            return parseInt(minC) + "分钟前";
+        }
+        return '刚刚';
     }
 }
 

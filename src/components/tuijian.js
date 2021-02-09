@@ -26,8 +26,19 @@ class Tuijian extends React.Component {
     }
 
     componentDidMount() {
+        if (this.contentNode) {
+            this.contentNode.addEventListener('scroll', this.onScrollHandle.bind(this));
+        }
         this.callAPI();
 
+    }
+
+    onScrollHandle(event) {
+        const clientHeight = event.target.clientHeight
+        const scrollHeight = event.target.scrollHeight
+        const scrollTop = event.target.scrollTop
+        const isBottom = (clientHeight + scrollTop === scrollHeight)
+        console.log('is bottom:' + isBottom)
     }
 
 //`/content/${value._id}`
@@ -47,7 +58,7 @@ class Tuijian extends React.Component {
 
     render() {
         return (
-            <div>
+            <div >
                 {
                     this.state.list.map((value, key) => {
                         return (
@@ -67,6 +78,12 @@ class Tuijian extends React.Component {
                 }
             </div>
         )
+    }
+
+    componentWillUnmount() {
+        if (this.contentNode) {
+            this.contentNode.removeEventListener('scroll', this.onScrollHandle.bind(this));
+        }
     }
 }
 

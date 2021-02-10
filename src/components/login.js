@@ -79,16 +79,17 @@ class Login extends React.Component {
     render() {
         //已登录
         if (this.state.view == 'signok') return (<div className={'login-box'}>
-            <div className={"right-text"} onClick={this.exitEvent}>退出登录
+            <div className={"right-text"} onClick={this.exitEvent} style={{cursor: "pointer"}}>退出登录
             </div>
             <img src={this.state.info.head_img}/>
             <br/><p>昵称：<strong id={"username"}>{this.state.info.name}</strong></p>
             <p>性别：{this.state.info.sex}</p>
             <Link to={"/Add"}>
-                <button onClick={this.AddEvent} id={"fabu"}>发布文章</button>
+                <button onClick={this.AddEvent} id={"fabu"} className={"log_form"}>发布文章</button>
             </Link>
+            <br/>
             <Link to={"/Edit/" + this.state.info.name}>
-                <button onClick={this.AddEvent} id={"fabu"}>编辑文章</button>
+                <button onClick={this.AddEvent} id={"fabu"} className={"log_form"}>编辑文章</button>
             </Link>
         </div>)
         //登录
@@ -104,9 +105,10 @@ class Login extends React.Component {
                 <button onClick={this.loginEvent}> 登录</button>
                 <p id={"wrong"}></p>
             </div>
+            <br/><br/>
             <div className={"signup"} onClick={() => {
                 this.setState({view: 'signup'})
-            }}>注册账号
+            }} style={{cursor: "pointer"}}>注册账号
             </div>
         </div>)
         //注册
@@ -118,13 +120,13 @@ class Login extends React.Component {
                           method={"POST"}>
                         <input placeholder={"账号/手机号"} type="text" ref={(input) => this.s_name = input}/>
                         <input placeholder={"密码"} type="password" ref={(input) => this.s_password = input}/>
-                        <input placeholder={"再次输入密码"} type="password" ref={(input) => this.again_passward = input}/>
+                        <input placeholder={"再次输入密码"} type="password" ref={(input) => this.again_password = input}/>
 
                     </form>
                     <button onClick={this.SignUpEvent}> 注册</button>
                     <div className={"signup"} onClick={() => {
                         this.setState({view: 'signin'})
-                    }}>已有账号，直接登录
+                    }} style={{cursor: "pointer"}}>已有账号，直接登录
                     </div>
                     {/*<iframe id={"respon"}></iframe>*/}
                 </div>

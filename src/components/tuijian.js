@@ -34,7 +34,9 @@ class Tuijian extends React.Component {
             .then((res) => {
                 for (var i = 0; i < res.data.newslist.length; i++) {
                     res.data.newslist[i].createdAt = this.decodeTimeStamp(new Date(res.data.newslist[i].createdAt).getTime())
-                    res.data.newslist[i].comment_id = eval('([' + res.data.newslist[i].comment_id + '])').length
+                    if (res.data.newslist[i].comment_id == undefined) res.data.newslist[i].comment_id = 0
+                    else res.data.newslist[i].comment_id = eval('([' + res.data.newslist[i].comment_id + '])').length
+                    if (res.data.newslist[i].title.length > 37) res.data.newslist[i].title = res.data.newslist[i].title.substring(0, 36) + '...'
                 }
                 this.setState({
                     list: res.data.newslist
@@ -50,8 +52,11 @@ class Tuijian extends React.Component {
             .then((res) => {
                 for (var i = 0; i < res.data.newslist.length; i++) {
                     res.data.newslist[i].createdAt = this.decodeTimeStamp(new Date(res.data.newslist[i].createdAt).getTime())
-                    res.data.newslist[i].comment_id = eval('([' + res.data.newslist[i].comment_id + '])').length
+                    if (res.data.newslist[i].comment_id == undefined) res.data.newslist[i].comment_id = 0
+                    else res.data.newslist[i].comment_id = eval('([' + res.data.newslist[i].comment_id + '])').length
+                    if (res.data.newslist[i].title.length > 37) res.data.newslist[i].title = res.data.newslist[i].title.substring(0, 36) + '...'
                 }
+                // console.log(res)
                 this.setState({
                     list: res.data.newslist
                 })
@@ -98,7 +103,7 @@ class Tuijian extends React.Component {
                     })
                 }
                 <div id={"nextpage"}>
-                    <button onClick={this.loadmore}>加载更多</button>
+                    <small onClick={this.loadmore} style={{cursor: 'pointer', color: 'blue'}}>⟳加载更多</small>
                 </div>
             </div>
         )

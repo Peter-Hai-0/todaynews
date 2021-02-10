@@ -9,7 +9,7 @@ class Add extends React.Component {
     }
 
     componentDidMount() {
-        document.getElementById("tab").style.visibility = "hidden"
+        // document.getElementById("tab").style.visibility = "hidden"
     }
 
     add_news = () => {

@@ -76,14 +76,16 @@ class Content extends React.Component {
     }
 
     componentDidMount() {
-        //console.log(this.props)
         this.getDetail(this.props.match.params.id);
 
+        let _id = this.props.match.params.id
+        let name = document.getElementById("username") == null ? '' : document.getElementById("username").innerHTML
+        axios.post('https://qc8vvg.fn.thelarkcloud.com/userView', {_id: _id, name: name})
 
     }
 
-    getDetail = (id) => {
-        var api = this.state.domain + id;
+    getDetail = (_id) => {
+        var api = this.state.domain + _id;
         axios.get(api)
             .then((res) => {
                 console.log(res);
@@ -97,11 +99,9 @@ class Content extends React.Component {
                     comments: res.data.result.comment_id,
                     //detail:res.data.result.detail
                 })
-                console.log(this.state.detail)
+                // console.log(this.state.detail)
                 //处理图片
                 this.getImg_url(res);
-
-
             })
             .catch((err) => {
                 console.log(err)

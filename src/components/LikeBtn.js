@@ -28,7 +28,7 @@ export default class LikeBtn extends Component {
 
     render() {
         return (<div>
-            <span onClick={this.handleLike.bind(this)}>
+            <span onClick={this.handleLike.bind(this)} style={{cursor: 'pointer'}}>
                     {
                         this.state.isLiked ? '赞😃' : '赞☺'
                     }

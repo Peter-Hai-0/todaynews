@@ -28,7 +28,7 @@ export default class HateBtn extends Component {
 
     render() {
         return (<div>
-            <span onClick={this.handleHate.bind(this)}>
+            <span onClick={this.handleHate.bind(this)} style={{cursor: 'pointer'}}>
                     {
                         this.state.isHated ? '踩😫' : '踩☹'
                     }

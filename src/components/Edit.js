@@ -11,8 +11,8 @@ class Edit extends React.Component {
             view: "choose",
             article: {_id: "", title: "", writer: "", detail: ""},
             list: [],
-            color_list: []
-
+            total_pv: 0,
+            total_uv: 0
         }
     }
 
@@ -77,6 +77,7 @@ class Edit extends React.Component {
                 this.setState({
                     list: res.data.news
                 })
+                this.cpt_uv()
             })
             .catch((err) => {
                 console.log(err)
@@ -98,6 +99,16 @@ class Edit extends React.Component {
     }
     blue = () => {
         return <small className={'edit-like'} style={{color: 'blue'}}>线上</small>
+    }
+    cpt_uv = () => {
+        let pv = 0, uv = 0;
+        for (var i = 0; i < this.state.list.length; i++) {
+            pv += this.state.list[i].views_number
+            uv += this.state.list[i].userViewNumber
+        }
+        this.setState({
+            total_pv: pv, total_uv: uv
+        })
     }
 
 
@@ -136,7 +147,10 @@ class Edit extends React.Component {
             } else {
                 return (
                     <div>
-                        <h3>我的文章列表:</h3>
+                        <h3>我的文章列表:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size="2" style={{
+                            color: 'dimgray',
+                            float: 'right'
+                        }}>总访问量:{this.state.total_pv}&nbsp;&nbsp;&nbsp;总访问数:{this.state.total_uv}</font></h3>
                         {
                             this.state.list.slice().reverse().map((value, key) => {
                                 return (
@@ -156,11 +170,14 @@ class Edit extends React.Component {
                                         <small className={'edit-like'}>状态:</small>
                                         {/*<small className={'edit-like'}  style={{color:this.state.list.color}}>{value.online?'线上':'线下'}</small>*/}
                                         {value.online ? this.blue() : this.red()}
-                                        &nbsp;&nbsp;&nbsp;
                                         <small style={{cursor: "pointer"}}
-                                               onClick={this.changestate.bind(this, value)}>●切换状态
+                                               onClick={this.changestate.bind(this, value)}>⇵
                                         </small>
-
+                                        &nbsp;&nbsp;&nbsp;
+                                        <small className={'edit-like'}>访问量:{value.views_number}</small>
+                                        &nbsp;&nbsp;&nbsp;
+                                        <small className={'edit-like'}>访问数:{value.userViewNumber}</small>
+                                        &nbsp;&nbsp;&nbsp;
                                         {/*<img src={like_1}/>*/}
                                         <br/>
                                         <br/>

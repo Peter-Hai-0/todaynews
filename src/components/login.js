@@ -89,7 +89,7 @@ class Login extends React.Component {
             </Link>
             <br/>
             <Link to={"/Edit/" + this.state.info.name}>
-                <button onClick={this.AddEvent} id={"fabu"} className={"log_form"}>编辑文章</button>
+                <button onClick={this.AddEvent} id={"fabu"} className={"log_form"}>文章列表</button>
             </Link>
         </div>)
         //登录

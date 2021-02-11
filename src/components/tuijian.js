@@ -88,10 +88,11 @@ class Tuijian extends React.Component {
                                     &nbsp;&nbsp;&nbsp;
                                     <small>{value.comment_id}评论</small>
                                     &nbsp;&nbsp;&nbsp;
+                                    <small className={'edit-like'}>{value.views_number}访问</small>
+                                    &nbsp;&nbsp;&nbsp;
                                     <small className={'edit-like'}>☺{value.like}</small>
                                     &nbsp;&nbsp;&nbsp;
                                     <small className={'edit-like'}>☹{value.hate}</small>
-                                    &nbsp;&nbsp;&nbsp;
                                     {/*&nbsp;&nbsp;&nbsp;<small>👍{value.like.length}</small>*/}
 
                                     {/*{value.hate}*/}

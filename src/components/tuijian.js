@@ -2,7 +2,7 @@ import React from 'react';
 import {Router, Route, Link} from 'react-router-dom';
 import Content from './content';
 import axios from 'axios'
-import ReactPullToRefresh from 'react-pull-to-refresh'
+// import ReactPullToRefresh from 'react-pull-to-refresh'
 
 class Tuijian extends React.Component {
     constructor(props) {

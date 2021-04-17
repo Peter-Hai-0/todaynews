@@ -11,7 +11,6 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
 .body {
   min-width: 1054px;
   min-height: 1100px;
@@ -82,11 +81,23 @@ code {
 }
 .tab a{
     font-size: 1em;
-    padding: 5px 10px;
+    padding: 5px 12px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.tab a:hover {
     background-color: red;
     color: white;
-    border-radius: 5px;
-    text-decoration: none;
+}
+
+.tab1 a {
+    background-color: red;
+    color: white;
+}
+
+.tab0 a {
+    color: black;
 }
 
 /*搜索框样式*/
@@ -96,7 +107,8 @@ code {
 
 .search-wrapper button {
     background-color: red; /* Green */
-    margin-left: 5px;
+    margin-left: 2px;
+    margin-top: 3px;
     border: none;
     color: white;
     padding: 4px 10px;
@@ -109,6 +121,7 @@ code {
 }
 
 .search-wrapper input {
+    outline: none;
   height: 20px;
   margin-bottom: 5px;
   font-size: 14px;
@@ -151,6 +164,7 @@ code {
     background: azure;
     height: 190px;
     child-align: middle;
+    text-align: center;
 }
 
 
@@ -162,34 +176,36 @@ code {
   white-space: nowrap;
 }
 
-.log_form {
-    text-align: center;
-}
+/*.log_form {*/
+/*text-align: center;*/
+/*}*/
 
-.log_form button {
-    float: left;
-}
+/*.log_form button {*/
+/*float: left;*/
+/*}*/
 
 .log_form input {
-    width: 180px;
+    width: 70%;
     height: 24px;
-    line-height: 24px;
+    border-radius: 3px;
+    border: #aa0000 solid 1px;
+}
+
+.log_form input:focus {
+    border-color: #66afe9;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6)
 }
 
 .login-box button {
-    /*background: brown;*/
-    /*color: white;*/
-    /*!*width: 50%;*!*/
     height: 18%;
-    /*width: 190px;*/
-    /*height: 24px;*/
     margin-top: 2px;
-    margin-left: 28%;
+    /*margin-left: 28%;*/
     text-align: center;
     width: 90px;
     padding: 8px;
     background-color: #aa0000;
-    border-color: #357ebd;
     color: #fff;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
@@ -205,7 +221,6 @@ code {
 .login-box img {
     height: 40px;
     border: 1px dashed #ccc;
-    margin-left: 40%;
 }
 
 .login-box iframe {
@@ -214,13 +229,6 @@ code {
 }
 
 .add_news button {
-    /*background: brown;*/
-    /*color: white;*/
-    /*width: 190px;*/
-    /*height: 24px;*/
-    /*margin-top: 10px;*/
-    /*padding-left: 20px;*/
-    /*text-align: center;*/
     width: 200px;
     padding: 8px;
     background-color: #428bca;
@@ -237,10 +245,6 @@ code {
     font-size: 125%
 }
 
-#fabu {
-    /*background-color: brown;*/
-    /*margin-left: 34px*/
-}
 
 .signup {
     color: blue;
@@ -257,11 +261,10 @@ code {
 
 .add_article {
     position: relative;
-    top: -35px;
-    background-color: #e8e8e8;
+    top: -50px;
+    background-color: #f5f5f5;
     text-align: center;
     width: 100%;
-    border: 2px solid #cccccc;
 }
 
 .add_article hr {
@@ -273,19 +276,34 @@ code {
 }
 
 .add_article input {
-    margin-top: 2%;
+    outline-style: none;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 5px 14px;
     width: 30%;
-    padding-top: 2px;
+    font-size: 14px;
+    font-family: "Microsoft soft";
+    margin: 5px;
+}
+
+.add_article input:focus {
+    border-color: #66afe9;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6)
 }
 
 #laiyuan {
-    width: 15%;
+    width: 5%;
     height: 18px;
 }
 
 .add_article textarea {
     /*padding-top: 10%;*/
+    border-radius: 5px;
     margin-top: 5%;
+    outline-style: none;
+    padding: 5px;
     resize: none;
     width: 70%;
     min-height: 600px;
@@ -319,9 +337,21 @@ code {
 }
 
 .edit_article input {
-    margin-top: 2%;
+    outline-style: none;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 5px 14px;
     width: 30%;
-    padding-top: 2px;
+    font-size: 14px;
+    font-family: "Microsoft soft";
+    margin: 5px;
+}
+
+.edit_article input:focus {
+    border-color: #66afe9;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6)
 }
 
 #laiyuan {
@@ -331,11 +361,13 @@ code {
 
 .edit_article textarea {
     /*padding-top: 10%;*/
+    border-radius: 5px;
     margin-top: 5%;
+    outline-style: none;
+    padding: 5px;
     resize: none;
     width: 70%;
     min-height: 600px;
-
 }
 
 .edit_article button {
@@ -346,8 +378,38 @@ code {
     text-align: center;
 }
 
+.edit_header {
+    margin-bottom: 2%;
+}
+
+.pv_uv {
+    float: right;
+}
+
+.pv_uv a {
+    font-size: 0.8em;
+}
+
+.pv_uv strong {
+    font-family: "Corbel Light";
+}
+
+.edit_list_pv_uv strong {
+    font-size: 1.2em;
+}
+
+.edit_list {
+    border-bottom: #e8e8e8 solid 1px;
+    padding: 14px;
+}
+
+.edit_list li:hover {
+    color: #357ebd;
+}
 #nextpage {
-    margin-left: 300px;
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 4%;
 }
 
 /*文章列表样式*/

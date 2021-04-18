@@ -8,8 +8,9 @@ class NewsList extends React.Component {
         super(props);
         this.state = {
             list: [],
-            news_num: 15,
-            view: 'loading'
+            news_num: 10,
+            view: 'loading',
+            loadmore: false
         }
     }
 
@@ -28,20 +29,23 @@ class NewsList extends React.Component {
     callAPI = () => {
         let type = "推荐";
         if (this.props.match.params !== {}) {
-            var types = ["推荐", "时政", "数码", "历史", "体育", "军事", "国际", "美食"];
+            let types = ["推荐", "时政", "数码", "历史", "体育", "军事", "国际", "美食"];
             type = types[this.props.match.params.type];
         }
-        axios.get('https://qc8vvg.fn.thelarkcloud.com/newest_', {params: {pageNum: 0, pageSize: 15, type: type}})
+        console.log(type);
+        axios.get('https://qc8vvg.fn.thelarkcloud.com/newest_', {params: {pageNum: 0, pageSize: 10, type: type}})
             .then((res) => {
+                console.log(res.data.newslist)
                 for (var i = 0; i < res.data.newslist.length; i++) {
-                    res.data.newslist[i].createdAt = this.decodeTimeStamp(new Date(res.data.newslist[i].createdAt).getTime())
-                    if (res.data.newslist[i].comment_id === undefined) res.data.newslist[i].comment_id = 0
-                    else res.data.newslist[i].comment_id = eval('([' + res.data.newslist[i].comment_id + '])').length
+                    res.data.newslist[i].createdAt = this.decodeTimeStamp(new Date(res.data.newslist[i].createdAt).getTime());
+                    if (res.data.newslist[i].comment_id === undefined) res.data.newslist[i].comment_id = 0;
+                    else res.data.newslist[i].comment_id = eval('([' + res.data.newslist[i].comment_id + '])').length;
                     if (res.data.newslist[i].title.length > 37) res.data.newslist[i].title = res.data.newslist[i].title.substring(0, 36) + '...'
                 }
                 this.setState({
                     list: res.data.newslist,
-                    view: 'newslist'
+                    view: 'newslist',
+                    news_num: res.data.len
                 })
             })
             .catch((err) => {
@@ -49,25 +53,36 @@ class NewsList extends React.Component {
             })
     };
     loadmore = () => {
-        this.state.news_num = 3 + this.state.news_num
-        axios.get('https://qc8vvg.fn.thelarkcloud.com/newest_', {params: {pageNum: 0, pageSize: this.state.news_num}})
+        this.setState({loadmore: true});
+        setTimeout(() => {
+            this.handleLoadmore()
+        }, 300);
+    };
+    handleLoadmore = () => {
+        axios.get('https://qc8vvg.fn.thelarkcloud.com/newest_', {params: {pageNum: this.state.news_num, pageSize: 5}})
             .then((res) => {
+                console.log(res.data.newslist);
                 for (var i = 0; i < res.data.newslist.length; i++) {
-                    res.data.newslist[i].createdAt = this.decodeTimeStamp(new Date(res.data.newslist[i].createdAt).getTime())
-                    if (res.data.newslist[i].comment_id === undefined) res.data.newslist[i].comment_id = 0
+                    res.data.newslist[i].createdAt = this.decodeTimeStamp(new Date(res.data.newslist[i].createdAt).getTime());
+                    if (res.data.newslist[i].comment_id === undefined) res.data.newslist[i].comment_id = 0;
                     else res.data.newslist[i].comment_id = eval('([' + res.data.newslist[i].comment_id + '])').length
                     if (res.data.newslist[i].title.length > 37) res.data.newslist[i].title = res.data.newslist[i].title.substring(0, 36) + '...'
                 }
                 // console.log(res)
                 this.setState({
-                    list: res.data.newslist
+                    list: this.state.list.concat(res.data.newslist),
+                    loadmore: false,
+                    news_num: this.state.news_num + res.data.len
                 })
 
             })
             .catch((err) => {
+                this.setState({
+                    loadmore: false
+                })
                 alert("没有更多")
             })
-    }
+    };
 
     render() {
         if (this.state.view === 'newslist') return (
@@ -98,7 +113,8 @@ class NewsList extends React.Component {
                     })
                 }
                 <div id={"nextpage"}>
-                    <small onClick={this.loadmore} style={{cursor: 'pointer', color: 'blue'}}>⟳加载更多</small>
+                    {this.state.loadmore ? <Loading/> :
+                        <small onClick={this.loadmore} style={{cursor: 'pointer', color: 'blue'}}>⟳加载更多</small>}
                 </div>
             </div>
         );

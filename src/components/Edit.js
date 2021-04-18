@@ -3,12 +3,13 @@ import {Router, Route, Link} from 'react-router-dom';
 import axios from 'axios'
 import login from "./login";
 import like_1 from '../assets/images/like_1.png';
+import Loading from './small_component/Loading'
 
 class Edit extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            view: "choose",
+            view: "loading",
             article: {_id: "", title: "", writer: "", detail: ""},
             list: [],
             pv: 0,
@@ -16,11 +17,8 @@ class Edit extends React.Component {
         }
     }
 
-    componentDidMount() {
-        document.getElementById("tab").style.visibility = "hidden"
-    }
 
-    handleclicked = (_id) => {
+    handleEdit = (_id) => {
         axios.get('https://qc8vvg.fn.thelarkcloud.com/query?_id=' + _id)
             .then((res) => {
                 this.setState({
@@ -36,7 +34,7 @@ class Edit extends React.Component {
             .catch((err) => {
                 console.log(err);
             })
-    }
+    };
     updatenews = () => {
         let _id = this.state.article._id;
         axios.patch("https://qc8vvg.fn.thelarkcloud.com/userNews", {
@@ -67,12 +65,19 @@ class Edit extends React.Component {
 
     //获取文章列表
     componentDidMount() {
+        setTimeout(() => {
+            this.callAPI()
+        }, 500);
+    }
+
+    callAPI = () => {
         axios.get('https://qc8vvg.fn.thelarkcloud.com/userNews?name=' + this.props.match.params.name)
             .then((res) => {
                 console.log(res.data.news);
                 this.computePvUv(res.data.news);
                 this.setState({
-                    list: res.data.news
+                    list: res.data.news,
+                    view: 'choose'
                 })
             })
             .catch((err) => {
@@ -113,7 +118,7 @@ class Edit extends React.Component {
 
     render() {
         //编辑界面
-        if (this.state.view == "edit") return (
+        if (this.state.view === "edit") return (
             <div className={"edit_article"}>
                 <button onClick={() => {
                     this.setState({view: "choose"})
@@ -136,7 +141,7 @@ class Edit extends React.Component {
             </div>
         )
         //文章列表界面
-        else if (this.state.view == "choose") {
+        else if (this.state.view === "choose") {
             if (this.state.list.length === 0) {
                 return (
                     <div>
@@ -157,8 +162,9 @@ class Edit extends React.Component {
                             this.state.list.slice().reverse().map((value, key) => {
                                 return (
                                     <div key={key} className={'edit_list'}>
-                                        <li onClick={this.handleclicked.bind(this, value._id)}
-                                            style={{cursor: "pointer"}}>{value.title}</li>
+                                        <div style={{cursor: "pointer"}}>
+                                            <Link target="_self" to={`/content/${value._id}`}>{value.title}</Link>
+                                        </div>
                                         <small
                                             className={'edit-time'}>发布于{this.decodeTimeStamp(new Date(value.createdAt).getTime())}</small>
                                         &nbsp;&nbsp;&nbsp;
@@ -180,6 +186,7 @@ class Edit extends React.Component {
                                         <small className={'edit-like'}>访问量:{value.views_number}</small>
                                         &nbsp;&nbsp;&nbsp;
                                         <small className={'edit-like'}>访问人数:{value.userViewNumber}</small>
+                                        <i onClick={this.handleEdit.bind(this, value._id)}>编辑</i>
                                     </div>
                                 )
                             })
@@ -187,7 +194,7 @@ class Edit extends React.Component {
                     </div>)
             }
 
-        }
+        } else return <Loading/>
 
     }
 

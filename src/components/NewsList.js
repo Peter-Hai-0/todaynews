@@ -10,7 +10,8 @@ class NewsList extends React.Component {
             list: [],
             news_num: 10,
             view: 'loading',
-            loadmore: false
+            loadmore: false,
+            type: "推荐"
         }
     }
 
@@ -21,21 +22,18 @@ class NewsList extends React.Component {
     }
 
     componentWillReceiveProps() {
-        this.setState({view: 'loading'});
+        this.setState({
+            view: 'loading',
+        });
         setTimeout(() => {
-            this.callAPI()
+            this.setState({type: this.props.match.params.type})
+            this.callAPI();
         }, 1000);
     }
     callAPI = () => {
-        let type = "推荐";
-        if (this.props.match.params !== {}) {
-            let types = ["推荐", "时政", "数码", "历史", "体育", "军事", "国际", "美食"];
-            type = types[this.props.match.params.type];
-        }
-        console.log(type);
+        let type = this.state.type;
         axios.get('https://qc8vvg.fn.thelarkcloud.com/newest_', {params: {pageNum: 0, pageSize: 10, type: type}})
             .then((res) => {
-                console.log(res.data.newslist)
                 for (var i = 0; i < res.data.newslist.length; i++) {
                     res.data.newslist[i].createdAt = this.decodeTimeStamp(new Date(res.data.newslist[i].createdAt).getTime());
                     if (res.data.newslist[i].comment_id === undefined) res.data.newslist[i].comment_id = 0;
@@ -59,7 +57,13 @@ class NewsList extends React.Component {
         }, 300);
     };
     handleLoadmore = () => {
-        axios.get('https://qc8vvg.fn.thelarkcloud.com/newest_', {params: {pageNum: this.state.news_num, pageSize: 5}})
+        axios.get('https://qc8vvg.fn.thelarkcloud.com/newest_', {
+            params: {
+                pageNum: this.state.news_num,
+                pageSize: 5,
+                type: this.state.type
+            }
+        })
             .then((res) => {
                 console.log(res.data.newslist);
                 for (var i = 0; i < res.data.newslist.length; i++) {

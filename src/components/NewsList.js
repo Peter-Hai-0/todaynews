@@ -1,52 +1,60 @@
 import React from 'react';
 import {Router, Route, Link} from 'react-router-dom';
-import Content from './content';
 import axios from 'axios'
-// import ReactPullToRefresh from 'react-pull-to-refresh'
-import {Button} from 'antd'
+import Loading from './small_component/Loading'
 
-class Tuijian extends React.Component {
+class NewsList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             list: [],
-            news_num: 15
-
-
+            news_num: 15,
+            view: 'loading'
         }
     }
 
     componentDidMount() {
-
-        this.callAPI();
-
+        setTimeout(() => {
+            this.callAPI()
+        }, 1000);
     }
 
-//`/content/${value._id}`
+    componentWillReceiveProps() {
+        this.setState({view: 'loading'});
+        setTimeout(() => {
+            this.callAPI()
+        }, 1000);
+    }
     callAPI = () => {
-        axios.get('https://qc8vvg.fn.thelarkcloud.com/newest_', {params: {pageNum: 0, pageSize: 15}})
+        let type = "推荐";
+        if (this.props.match.params !== {}) {
+            var types = ["推荐", "时政", "数码", "历史", "体育", "军事", "国际", "美食"];
+            type = types[this.props.match.params.type];
+        }
+        axios.get('https://qc8vvg.fn.thelarkcloud.com/newest_', {params: {pageNum: 0, pageSize: 15, type: type}})
             .then((res) => {
                 for (var i = 0; i < res.data.newslist.length; i++) {
                     res.data.newslist[i].createdAt = this.decodeTimeStamp(new Date(res.data.newslist[i].createdAt).getTime())
-                    if (res.data.newslist[i].comment_id == undefined) res.data.newslist[i].comment_id = 0
+                    if (res.data.newslist[i].comment_id === undefined) res.data.newslist[i].comment_id = 0
                     else res.data.newslist[i].comment_id = eval('([' + res.data.newslist[i].comment_id + '])').length
                     if (res.data.newslist[i].title.length > 37) res.data.newslist[i].title = res.data.newslist[i].title.substring(0, 36) + '...'
                 }
                 this.setState({
-                    list: res.data.newslist
+                    list: res.data.newslist,
+                    view: 'newslist'
                 })
             })
             .catch((err) => {
                 console.log(err)
             })
-    }
+    };
     loadmore = () => {
         this.state.news_num = 3 + this.state.news_num
         axios.get('https://qc8vvg.fn.thelarkcloud.com/newest_', {params: {pageNum: 0, pageSize: this.state.news_num}})
             .then((res) => {
                 for (var i = 0; i < res.data.newslist.length; i++) {
                     res.data.newslist[i].createdAt = this.decodeTimeStamp(new Date(res.data.newslist[i].createdAt).getTime())
-                    if (res.data.newslist[i].comment_id == undefined) res.data.newslist[i].comment_id = 0
+                    if (res.data.newslist[i].comment_id === undefined) res.data.newslist[i].comment_id = 0
                     else res.data.newslist[i].comment_id = eval('([' + res.data.newslist[i].comment_id + '])').length
                     if (res.data.newslist[i].title.length > 37) res.data.newslist[i].title = res.data.newslist[i].title.substring(0, 36) + '...'
                 }
@@ -61,11 +69,9 @@ class Tuijian extends React.Component {
             })
     }
 
-
     render() {
-        return (
+        if (this.state.view === 'newslist') return (
             <div>
-                {/*<button onClick={()=>{alert(this.state.pageNum)}}>show</button>*/}
                 {
                     this.state.list.map((value, key) => {
                         return (
@@ -82,13 +88,9 @@ class Tuijian extends React.Component {
                                     &nbsp;&nbsp;&nbsp;
                                     <small>{value.comment_id}评论</small>
                                     &nbsp;&nbsp;&nbsp;
-                                    <small className={'edit-like'}>☺{value.like}</small>
+                                    <small className={'edit-like'}>{value.views_number}次访问</small>
                                     &nbsp;&nbsp;&nbsp;
-                                    <small className={'edit-like'}>☹{value.hate}</small>
-                                    &nbsp;&nbsp;&nbsp;
-                                    {/*&nbsp;&nbsp;&nbsp;<small>👍{value.like.length}</small>*/}
 
-                                    {/*{value.hate}*/}
                                 </div>
                             </div>
 
@@ -99,7 +101,10 @@ class Tuijian extends React.Component {
                     <small onClick={this.loadmore} style={{cursor: 'pointer', color: 'blue'}}>⟳加载更多</small>
                 </div>
             </div>
-        )
+        );
+        else {
+            return <Loading/>
+        }
     }
 
     decodeTimeStamp = (timestamp) => {
@@ -161,4 +166,4 @@ class Tuijian extends React.Component {
     }
 }
 
-export default Tuijian;
+export default NewsList;

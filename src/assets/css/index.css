@@ -127,13 +127,7 @@ code {
   font-size: 14px;
 }
 
-/*左右样式*/
-/*.wrapper {*/
-  /*display: flex;*/
-  /*flex-direction: row;*/
-  /*justify-content: space-between;*/
 
-/*}*/
 
 .left {
   margin-left: 10%;
@@ -453,39 +447,6 @@ code {
   white-space: nowrap;
 }
 
-/*个人中心样式*/
-.me-head {
-  background: black;
-  height: 30px;
-  color: white;
-  text-align: center;
-  white-space: nowrap;
-}
-
-.me {
-  display: flex;
-  flex-direction: row;
-  justify-content: start;
-
-
-}
-
-.me-left {
-  padding-left: 5%;
-  padding-right: 5%;
-  background: #e8e8e8;
-  height: 100%;
-}
-
-.me-right {
-  flex: 1;
-}
-
-.me-item a {
-  text-decoration: none;
-  color: black;
-  white-space: nowrap;
-}
 
 /*文章列表样式*/
 .articlelist {
@@ -626,46 +587,47 @@ code {
   height: 12px;
 }
 
-/*登录弹窗样式*/
-.modal {
-  height: 250px;
-  width: 400px;
-  background: #f5f5f5;
-  margin-left: 30%;
-  margin-top: 200px;
-}
+/*!*登录弹窗样式*!*/
+/*.modal {*/
+/*height: 250px;*/
+/*width: 400px;*/
+/*background: #f5f5f5;*/
+/*margin-left: 30%;*/
+/*margin-top: 200px;*/
+/*}*/
 
-.modal h2 {
-  text-align: center;
-  font-family: 方正舒体;
-  color: red;
-  margin-bottom: 5px;
-}
+/*.modal h2 {*/
+/*text-align: center;*/
+/*font-family: 方正舒体;*/
+/*color: red;*/
+/*margin-bottom: 5px;*/
+/*}*/
 
-.modal p {
-  text-align: center;
-  font-weight: bold;
-}
+/*.modal p {*/
+/*text-align: center;*/
+/*font-weight: bold;*/
+/*}*/
 
-.label-phone {
-  margin-top: 10px;
-}
+/*.label-phone {*/
+/*margin-top: 10px;*/
+/*}*/
 
-.label-phone a {
-  width: 80px;
-  margin-left: 30px;
-  margin-right: 20px;
-  color: black;
-}
+/*.label-phone a {*/
+/*width: 80px;*/
+/*margin-left: 30px;*/
+/*margin-right: 20px;*/
+/*color: black;*/
+/*}*/
 
-.label-code a {
-  width: 80px;
-  margin-left: 45px;
-  margin-right: 37px;
-  color: black;
-}
+/*.label-code a {*/
+/*width: 80px;*/
+/*margin-left: 45px;*/
+/*margin-right: 37px;*/
+/*color: black;*/
+/*}*/
 
-.submit {
-  margin-left: 175px;
-  background: aquamarine;
-}
+/*.submit {*/
+/*margin-left: 175px;*/
+/*background: aquamarine;*/
+/*}*/
+

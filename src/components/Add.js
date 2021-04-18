@@ -32,7 +32,7 @@ class Add extends React.Component {
     render() {
         return (
             <div className={"add_article"}>
-                <h2>发布新闻</h2>
+                <h2>发布文章</h2>
                 <h3 id={"succ_add"}></h3>
 
                 <label>标题</label><input name={"title"} type={"text"} ref={"title"}/> <br/>

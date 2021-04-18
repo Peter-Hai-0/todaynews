@@ -97,7 +97,6 @@ class Content extends React.Component {
                     comments: res.data.result.comment_id,
                     //detail:res.data.result.detail
                 })
-                console.log(this.state.detail)
                 //处理图片
                 this.getImg_url(res);
 
@@ -105,6 +104,15 @@ class Content extends React.Component {
             })
             .catch((err) => {
                 console.log(err)
+            });
+        let _id = this.props.match.params.id;
+        let name = document.getElementById("username_value").innerHTML;
+        axios.post("https://qc8vvg.fn.thelarkcloud.com/userView", {_id: _id, name: name})
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((err) => {
+                console.log(err);
             })
     }
     createMarkup = (str) => {

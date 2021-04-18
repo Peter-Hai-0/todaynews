@@ -1,24 +1,15 @@
 import './assets/css/index.css';
-import Axios from 'axios';
 import React from 'react';
+// import "antd/dist/antd.css"
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
-
-import Tuijian from './components/tuijian'
+import NewsList from './components/NewsList'
 import Head from './components/head'
 import Tail from './components/tail'
-import Keji from './components/keji'
-import Redian from './components/redian'
-import Yule from './components/yule'
-import Youxi from './components/youxi'
-import Zhibo from './components/zhibo'
-import Shuma from './components/shuma'
-import Caijing from './components/caijing'
 import Login from './components/login'
-import Me from './components/me';
 import Content from './components/content'
 import Add from './components/Add'
 import Edit from './components/Edit'
-import {message} from 'antd'
+import Tab from './components/Tab'
 
 // import LoginPage from './components/loginPage/loginPage'
 
@@ -59,27 +50,12 @@ class App extends React.Component {
                     <br/>
                     <div className={'wrapper'}>
                         <div className={'left'}>
-                            <div className="tab">
-                                <Link to="/"><a>推荐</a></Link>
-                                <Link to="/"><a>热点</a></Link>
-                                <Link to="/"><a>科技</a></Link>
-                                <Link to="/"><a>直播</a></Link>
-                                <Link to="/"><a>游戏</a></Link>
-                                <Link to="/"><a>娱乐</a></Link>
-                                <Link to="/"><a>数码</a></Link>
-                                <Link to="/"><a>财经</a></Link>
-                            </div>
+                            <Tab/>
                             <div className={"router_item"}>
-                                <Route exact path="/" component={Tuijian}/>
-                                <Route path="/keji" component={Keji}/>
-                                <Route path="/redian" component={Redian}/>
-                                <Route path="/zhibo" component={Zhibo}/>
-                                <Route path="/youxi" component={Youxi}/>
-                                <Route path="/yule" component={Yule}/>
-                                <Route path="/shuma" component={Shuma}/>
-                                <Route path="/caijing" component={Caijing}/>
-                                <Route path={'/content/:id'} component={Content}></Route>
-                                <Route path="/Add" component={Add}/>
+                                <Route exact path="/:type" component={NewsList}/>
+                                <Route exact path="/" component={NewsList}/>
+                                <Route path={'/content/:id'} component={Content}/>
+                                <Route path="/Add/:name" component={Add}/>
                                 <Route path="/Edit/:name" component={Edit}/>
                             </div>
                         </div>
@@ -87,7 +63,6 @@ class App extends React.Component {
                         <div className={'right'}>
                             <div>
                                 <Login set_user_info={this.set_user_info}/>
-
                                 <hr color={'red'}/>
                                 <Tail/>
                             </div>
@@ -95,7 +70,6 @@ class App extends React.Component {
                         </div>
 
                     </div>
-                    {/*<Me/>*/}
                 </div>
 
 

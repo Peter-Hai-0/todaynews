@@ -2,7 +2,7 @@ import React from 'react';
 import '../assets/css/index.css';
 import Fetchjsonp from 'fetch-jsonp';
 import Axios from 'axios'
-import {Button} from 'antd'
+// import {Button} from 'antd'
 import {Link} from 'react-router-dom'
 
 class Head extends React.Component {

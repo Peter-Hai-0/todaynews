@@ -46,7 +46,7 @@ class Comments extends React.Component {
                     this.setState({
                         user_info: res.data.user_info,
                         user_img: res.data.user_info.head_img
-                    })
+                    });
                     this.forceUpdate();
                 }).catch((err) => {
                 console.log('getuserinfo error')

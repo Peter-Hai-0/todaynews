@@ -27,16 +27,20 @@ class Login extends React.Component {
             password: this.password.value
         })
             .then((res) => {
-                setTimeout(() => {
+                // console.log(res);
+                if (res.data.result === null) {
                     this.setState({
+                        view: 'signin'
+                    })
+                    alert("账号或密码错误");
+                } else this.setState({
                     info: {
                         head_img: res.data.result.head_img,
                         name: res.data.result.name,
                         sex: res.data.result.sex
                     },
                     view: 'signok',
-                    })
-                }, 1500);
+                });
                 // this.props.set_user_info(this.state.info);
                 document.getElementById("username_value").innerHTML = this.state.info.name;
             })
@@ -93,7 +97,7 @@ class Login extends React.Component {
             </Link>
             <br/>
             <Link to={"/Edit/" + this.state.info.name}>
-                <button onClick={this.AddEvent} id={"fabu"} className={"log_form"}>编辑文章</button>
+                <button onClick={this.AddEvent} id={"fabu"} className={"log_form"}>文章列表</button>
             </Link>
         </div>)
         //登录

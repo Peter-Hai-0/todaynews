@@ -52,7 +52,7 @@ export default class LikeBtn extends Component {
             let name = document.getElementById("username") == null ? '' : document.getElementById("username").innerHTML
             axios.post("https://qc8vvg.fn.thelarkcloud.com/userLiked", {name: name, _id: _id, type: 'd'})
                 .then((res) => {
-                    if (res.status == 200) console.log("取消点赞")
+                    if (res.status === 200) console.log("取消点赞")
                 })
                 .catch((err) => {
                     console.log(err)
